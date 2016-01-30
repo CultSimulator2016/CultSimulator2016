@@ -2,10 +2,10 @@
 var credits = function(game){}
 
 credits.prototype = {
-	preload: function(){ 
-		//this.game.load.image("Test Title","Honeyview_game.png");
+	preload: function(){
+		this.game.load.image("Credits Background","assets/screens/credits.jpg");
 	},
-  	create: function(){
-		//this.game.state.start("Title Screen");
+	create: function(){
+		this.add.sprite(0,0,"Credits Background");
 	}
 }
