@@ -12,11 +12,20 @@ titlescreen.prototype = {
 		this.game.add.button(this.game.world.centerX - 133.5,
 			this.game.world.centerY - 100,
 			'start_button',
-			function(){ game.state.console.log("lalala");},
+			function(){ console.log("start clicked");},
 			this,
 			1,
 			0,
 			2);
+
+			this.game.add.button(this.game.world.centerX - 133.5,
+				this.game.world.centerY + 100,
+				'temp_button',
+				function(){ console.log("credit clicked");},
+				this,
+				1,
+				0,
+				2);
 	}
 
 }
