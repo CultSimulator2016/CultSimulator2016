@@ -1,6 +1,8 @@
-var preloader = function(game){}
+//The screen containing our rituals, or something? idk
 
-preloader.prototype = {
+var rituals = function(game){}
+
+rituals.prototype = {
 	preload: function(){ 
 		//this.game.load.image("Test Title","Honeyview_game.png");
 	},
