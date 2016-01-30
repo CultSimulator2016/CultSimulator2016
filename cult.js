@@ -7,5 +7,7 @@ cult.prototype = {
 	},
   	create: function(){
 		//this.game.state.start("Title Screen");
+		var testSplash = this.add.sprite(0,0,"Test Cultist");
+
 	}
 }
