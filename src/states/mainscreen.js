@@ -2,15 +2,15 @@
 var mainscreen = function(game){}
 
 mainscreen.prototype = {
-	
+
 	preload: function() {
-		//Nothing here for now
-		
+		this.game.load.image("Mainscreen Background","assets/screens/mainscreen.jpg");
+
 	},
-	
+
 	create: function (){
-		//var testSplash = this.add.sprite(0,0,"Test Title");
-		
+		this.add.sprite(0,0,"Mainscreen Background");
+
 	}
-	
+
 }
