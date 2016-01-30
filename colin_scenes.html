@@ -7,6 +7,7 @@
 		<script src="Boot.js"></script>
 		<script src="preloader.js"></script>
 		<script src="titlescreen.js":></script>
+		<script src="cult.js":></script>
     </head>
     <body>
 
@@ -18,8 +19,9 @@
 	
     game.state.add("Boot",boot);
 	game.state.add("Preload",preloader);
+	game.state.add("Cult",cult);
 	game.state.add("Title Screen",titlescreen);
-	game.state.start("Boot");
+	game.state.start("Cult");
     })();
 
     </script>
