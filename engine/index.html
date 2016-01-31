@@ -246,7 +246,13 @@
                 }
 
                 entry.ritualHistory.push( { "id": ritualId, "value": ritualValue} );
-                return {"topic": ritual.topic, "ritualId": ritualId, "ritualValue": ritualValue, "prospectLossRisk": true};
+                return {
+                    "topic": ritual.topic, 
+                    "ritualId": ritualId, 
+                    "ritualValue": ritualValue, 
+                    "prospectLossRisk": true,
+                    "allowRebound": true
+                };
             }
         }
         
@@ -254,11 +260,17 @@
             return function(entry) {
                 var ritualValue = 0;
                 if(entry.ritualHistory.length > 0) {
-                    ritualValue = -Math.abs(entry.loyalty) * game.rnd.between(80, 120) / 100;
+                    ritualValue = -Math.abs(entry.loyalty) * game.rnd.between(0, 120) / 100;
                     entry.ritualHistory.push( { "id": "shakedown", "value": ritualValue} );
                     funds += entry.disposeableIncome;
                 }
-                return {"topic": "shaking down members for funds", "ritualId": "shakedown", "ritualValue": ritualValue, "prospectLossRisk": false};
+                return {
+                    "topic": "shaking down members for funds", 
+                    "ritualId": "shakedown", 
+                    "ritualValue": ritualValue, 
+                    "prospectLossRisk": false,
+                    "allowRebound": false
+                };
             }
         }
         
@@ -295,7 +307,7 @@
                         ++results.prospectsLeaving;
                     }
                 }
-                if(entry.staying && ritualValue < 0) {
+                if(entry.staying && ritualValue < 0 && actionResult.allowRebound) {
                     entry.ritualHistory.pop();
                     var newRitualValue = -ritualValue * game.rnd.between(-100, 250)/100;
                     entry.ritualHistory.push( { "id": actionResult.ritualId, "value": newRitualValue} );
