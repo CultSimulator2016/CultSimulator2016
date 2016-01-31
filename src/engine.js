@@ -1,8 +1,8 @@
 function Engine() {
   this.cardsList = [
-          { id: 1, text: "Sacrifice Chicken", cost: 100, image: "bad heart" },
-          { id: 2, text: "Dance Naked", cost: 150, image: "Test Cultist" },
-          { id: 3, text: "Eat Cat Food", cost: 200, image: "fake image" }
+          { id: 1, text: "Sacrifice Chicken", cost: 100, image: "card_kill_chicken" },
+          { id: 2, text: "Dance Naked", cost: 150, image: "card_dance_naked" },
+          { id: 3, text: "Eat Cat Food", cost: 200, image: "card_eat_cat_food" }
   ];
   this.shopAvailableCards = this.cardsList;
   this.playerAvailableCards = [];

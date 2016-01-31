@@ -4,21 +4,21 @@ var mainscreen = function(game){}
 mainscreen.prototype = {
 
 	moneyText: null,
-	
+
 	group1: null,
-	
+
 	group2: null,
-	
+
 	updateMoney: function(money){
 		this.moneyText.text =  money;
-		
+
 	},
-	
+
 	dayText: null,
-	
+
 	updateDate: function(day){
 		this.dayText.text =  day;
-		
+
 	},
 
 	preload: function() {
@@ -64,7 +64,7 @@ mainscreen.prototype = {
 				1,
 				0,
 				2);
-		
+
 		this.game.add.button(this.game.world.centerX + 10,
 				450,
 				'temp_button',
@@ -73,13 +73,13 @@ mainscreen.prototype = {
 				1,
 				0,
 				2);
-		
+
 			if(tutSeen == false){
 				this.tutorial();
 			}
-			
+
 	},
-	
+
 	tutorial: function(){
 		var devil = this.game.add.sprite(this.game.world.centerX * 1.3, this.game.world.centerY *.75, "Devil");
 		var dbox = this.game.add.sprite(devil.x / 5, devil.y /2, "Dialogue box");
@@ -87,48 +87,48 @@ mainscreen.prototype = {
 		txt.font = "Covered By Your Grace";
 		txt.fontSize = 20;
 		txt.fill = "#ffffff";
-		
+
 		var nxtAro = this.game.add.text(dbox.x * 4.5, dbox.y * 2.5, ">>");
 		nxtAro.font = "Covered By Your Grace";
 		nxtAro.fill = "#800000";
 		nxtAro.inputEnabled = true;
 		nxtAro.events.onInputDown.add(function(){tutSeen=true; this.group1.destroy();},this);
-			
+
 		this.group1 = this.game.add.group();
 		this.group1.add(devil);
 		this.group1.add(dbox);
 		this.group1.add(txt);
 		this.group1.add(nxtAro);
-		
+
 	},
-	
+
 	hist: function(butt){
 		var ls = engine.getHistory();
 		var his = "";
-		
+
 		if(ls.length >= 1){
 			for(i = 0; i < ls.length; i++){
 				his += ls[i] + "\n";
-			}	
+			}
 		}
 		else{
 			his = "Nothing!";
 		}
-		
+
 		var txt = this.game.add.text(this.game.world.centerX, this.game.world.centerY, his);
 		txt.font = "Covered By Your Grace";
 		txt.lineSpacing = 10;
-		
+
 		var ex = this.game.add.text(txt.x+ 150, txt.y, "X");
 		ex.font = "Covered By Your Grace";
 		ex.fill = "#800000";
 		ex.inputEnabled = true;
 		ex.events.onInputDown.add(function(){butt.inputEnabled = true; this.group2.destroy();},this);
-		
+
 		this.group2 = this.game.add.group();
 		this.group2.add(txt);
 		this.group2.add(ex);
-		
+
 	}
 
 }
