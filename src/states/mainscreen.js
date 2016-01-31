@@ -4,7 +4,7 @@ var mainscreen = function(game){}
 mainscreen.prototype = {
 
 	preload: function() {
-		this.game.load.image("Mainscreen Background","assets/screens/mainscreen.jpg");
+		
 
 	},
 
