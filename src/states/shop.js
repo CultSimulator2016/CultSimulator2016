@@ -18,7 +18,7 @@ shop.prototype = {
 		this.moneyText.fontSize = 30;
 		this.moneyText.align = "right";
 
-		engine.getCardsShop().forEach(function(card, index){
+		var addCardToGame = function(card, index) {
 			var ritualCardText = this.game.add.text(100, 200 + (75*index), card.text + " ...$" + card.cost);
 			ritualCardText.font = "Covered By Your Grace";
 			ritualCardText.fontSize = 60;
@@ -32,7 +32,9 @@ shop.prototype = {
 				selectedRitualCardText.fill = '#FF0000';
 		  }, this);
 			this.allCardOptions.push(ritualCardText);
-		}, this);
+		};
+
+		engine.getCardsShop().forEach(addCardToGame, this);
 
 		this.game.add.button(this.game.world.centerX / 10,
 				this.game.world.centerY * 1.8,
@@ -50,6 +52,10 @@ shop.prototype = {
 									engine.buyCard(this.selectedCard.id);
 									// TODO: Refresh screen
 									// refresh list of cards
+									this.allCardOptions.forEach(function(option){
+										option.destroy();
+										engine.getCardsShop().forEach(addCardToGame, this);
+									}, this);
 									// update money
 									this.moneyText.text = engine.getMoney().toString();
 							},
