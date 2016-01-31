@@ -1,13 +1,13 @@
-//The screen containing our rituals, or something? idk
+//The screen where we buy cards from the demon
 
-var rituals = function(game){}
+var recruitment = function(game){}
 
-rituals.prototype = {
+recruitment.prototype = {
 	preload: function(){ 
 		//this.game.load.image("Test Title","Honeyview_game.png");
 	},
   	create: function(){
-		var testSplash = this.add.sprite(0,0,"Test Ritual");
+		var testSplash = this.add.sprite(0,0,"Test Recruitment");
 		
 		var moneyText = this.game.add.text(this.game.world.centerX * 1.75, this.game.world.centerY/10, "$100");
 		moneyText.font = "Covered By Your Grace";
@@ -22,11 +22,20 @@ rituals.prototype = {
 				1,
 				0,
 				2);
-				
-		this.game.add.button(this.game.world.centerX,
-				this.game.world.centerY * 1.5,
+		
+		this.game.add.button(this.game.world.centerX - 100,
+				this.game.world.centerY * 1.8,
 				'temp_button',
-				function(){ console.log("Make Ritual button clicked");
+				function(){ this.game.state.start("Cult"); },
+				this,
+				1,
+				0,
+				2);
+				
+		this.game.add.button(this.game.world.centerX - 125,
+				this.game.world.centerY * 1.3,
+				'temp_button',
+				function(){ console.log("recruit button clicked");
 							},
 				this,
 				1,

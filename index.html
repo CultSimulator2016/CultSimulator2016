@@ -3,12 +3,16 @@
     <head>
         <meta charset="UTF-8" />
         <title>hello phaser!</title>
-        <script src="src\phaser.2.4.4.min.js"></script>
-		<script src="src\states\Boot.js"></script>
-		<script src="src\states\preloader.js"></script>
-		<script src="src\states\titlescreen.js"></script>
-		<script src="src\states\mainscreen.js"></script>
-		<script src="src\states\credits.js"></script>
+        <script src="src/phaser.2.4.4.min.js"></script>
+		<script src="src/states/Boot.js"></script>
+		<script src="src/states/preloader.js"></script>
+		<script src="src/states/titlescreen.js"></script>
+		<script src="src/states/mainscreen.js"></script>
+		<script src="src/states/cult.js"></script>
+		<script src="src/states/rituals.js"></script>
+		<script src="src/states/shop.js"></script>
+		<script src="src/states/recruitment.js"></script>
+		<script src="src/states/credits.js"></script>
     </head>
     <body>
 
@@ -18,10 +22,28 @@
 
     var game = new Phaser.Game(800, 600, Phaser.AUTO, '');
 
+    WebFontConfig = {
+
+        //  'active' means all requested fonts have finished loading
+        //  We set a 1 second delay before calling 'createText'.
+        //  For some reason if we don't the browser cannot render the text the first time it's created.
+        active: function() { game.time.events.add(Phaser.Timer.SECOND, function(){ }, this); },
+
+        //  The Google Fonts we want to load (specify as many as you like in the array)
+        google: {
+          families: ['Covered+By+Your+Grace::latin']
+        }
+
+    };
+
     game.state.add("Boot",boot);
 	game.state.add("Preload",preloader);
 	game.state.add("Title Screen",titlescreen);
 	game.state.add("Main Screen", mainscreen);
+	game.state.add("Cult", cult);
+	game.state.add("Rituals", rituals);
+	game.state.add("Shop", shop);
+	game.state.add("Recruit", recruitment);
 	game.state.add("Credits Screen", credits);
 	game.state.start("Boot");
     })();
