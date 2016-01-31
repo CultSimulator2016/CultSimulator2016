@@ -19,9 +19,9 @@ shop.prototype = {
 		this.moneyText.align = "right";
 
 		var addCardToGame = function(card, index) {
-			var ritualCardText = this.game.add.text(100, 200 + (75*index), card.text + " ...$" + card.cost);
+			var ritualCardText = this.game.add.text(65, 150 + (75*index), card.text + " ...$" + card.cost);
 			ritualCardText.font = "Covered By Your Grace";
-			ritualCardText.fontSize = 60;
+			ritualCardText.fontSize = 50;
 			ritualCardText.inputEnabled = true;
 			ritualCardText.events.onInputUp.add(function(selectedRitualCardText){
 				this.buyButton.inputEnabled = engine.getMoney() >= card.cost;
