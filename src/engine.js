@@ -21,9 +21,10 @@ Engine.prototype.getCardsShop = function() {
 };
 Engine.prototype.getCardsRitual = function() {
   return [
-    "Kill chickens",
-    "Eat cat food",
-    "Dance naked"
+    { id: 1, text: "Kill chickens" },
+    { id: 2, text: "Eat cat food" },
+    { id: 3, text: "Dance naked" },
+    { id: 63, text: "Burn book" }
   ];
 };
 Engine.prototype.buyCard = function(ritualId) {
