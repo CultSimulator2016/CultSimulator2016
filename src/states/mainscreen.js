@@ -25,11 +25,11 @@ mainscreen.prototype = {
 	create: function (){
 		this.add.sprite(0,0,"Mainscreen Background");
 
-		this.dayText = this.game.add.text(20, 12, "Day 1");
+		this.dayText = this.game.add.text(20, 12, "Day " + engine.getDay());
 		this.dayText.font = "Covered By Your Grace";
 		this.dayText.fontSize = 50;
-		
-		this.moneyText = this.game.add.text(this.game.world.centerX * 1.84, this.game.world.centerY/11, "100");
+
+		this.moneyText = this.game.add.text(this.game.world.centerX * 1.84, this.game.world.centerY/11, engine.getMoney().toString());
 		this.moneyText.font = "Covered By Your Grace";
 		this.moneyText.fontSize = 30;
 		this.moneyText.align = "right";
