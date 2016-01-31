@@ -3,6 +3,20 @@ var mainscreen = function(game){}
 
 mainscreen.prototype = {
 
+	moneyText: null,
+	
+	updateMoney: function(money){
+		this.moneyText.text =  money;
+		
+	},
+	
+	dayText: null,
+	
+	updateDate: function(day){
+		this.dayText.text =  day;
+		
+	},
+
 	preload: function() {
 
 
@@ -11,17 +25,17 @@ mainscreen.prototype = {
 	create: function (){
 		this.add.sprite(0,0,"Mainscreen Background");
 
-		var dayText = this.game.add.text(this.game.world.centerX / 4, this.game.world.centerY/10, "Day 1");
-		dayText.font = "Covered By Your Grace";
-		dayText.fontSize = 80;
-		
-		var moneyText = this.game.add.text(this.game.world.centerX * 1.75, this.game.world.centerY/10, "$100");
-		moneyText.font = "Covered By Your Grace";
-		moneyText.fontSize = 60;
-		moneyText.align = "right";
+		this.dayText = this.game.add.text(20, 12, "Day " + engine.getDay());
+		this.dayText.font = "Covered By Your Grace";
+		this.dayText.fontSize = 50;
+
+		this.moneyText = this.game.add.text(this.game.world.centerX * 1.84, this.game.world.centerY/11, engine.getMoney().toString());
+		this.moneyText.font = "Covered By Your Grace";
+		this.moneyText.fontSize = 30;
+		this.moneyText.align = "right";
 
 		this.game.add.button(this.game.world.centerX - 367,
-				this.game.world.centerY - 150,
+				130,
 				'temp_button',
 				function(){ this.game.state.start("Cult"); },
 				this,
@@ -29,8 +43,8 @@ mainscreen.prototype = {
 				0,
 				2);
 
-		this.game.add.button(this.game.world.centerX - 133.5,
-				this.game.world.centerY - 150,
+		this.game.add.button(this.game.world.centerX - 367,
+				200,
 				'temp_button',
 				function(){ this.game.state.start("Rituals"); },
 				this,
@@ -38,8 +52,8 @@ mainscreen.prototype = {
 				0,
 				2);
 
-		this.game.add.button(this.game.world.centerX + 133.5,
-				this.game.world.centerY - 150,
+		this.game.add.button(this.game.world.centerX - 367,
+				270,
 				'temp_button',
 				function(){ this.game.state.start("Shop"); },
 				this,
