@@ -5,6 +5,8 @@ mainscreen.prototype = {
 
 	moneyText: null,
 	
+	group1: null,
+	
 	updateMoney: function(money){
 		this.moneyText.text =  money;
 		
@@ -61,6 +63,13 @@ mainscreen.prototype = {
 				0,
 				2);
 		
+			if(tutSeen == false){
+				this.tutorial();
+			}
+			
+	},
+	
+	tutorial: function(){
 		var devil = this.game.add.sprite(this.game.world.centerX * 1.3, this.game.world.centerY *.75, "Devil");
 		var dbox = this.game.add.sprite(devil.x / 5, devil.y /2, "Dialogue box");
 		var txt = this.game.add.text(dbox.x * 1.3, dbox.y *1.3, "Howdy! You called? You've been chosen to\nrecruit and lead a bunch of followers to\nworship me, Nix! Wow, what a great honor!");
@@ -72,13 +81,14 @@ mainscreen.prototype = {
 		nxtAro.font = "Covered By Your Grace";
 		nxtAro.fill = "#800000";
 		nxtAro.inputEnabled = true;
-		//text.events.onInputDown.add(
+		nxtAro.events.onInputDown.add(function(){tutSeen=true; this.group1.destroy();},this);
+			
+		this.group1 = this.game.add.group();
+		this.group1.add(devil);
+		this.group1.add(dbox);
+		this.group1.add(txt);
+		this.group1.add(nxtAro);
 		
-		group1 = this.game.add.group();
-		group1.add(devil);
-		group1.add(dbox);
-		group1.add(txt);
-		group1.add(nxtAro);
 	}
 
 }
