@@ -9,6 +9,11 @@ shop.prototype = {
   	create: function(){
 		var testSplash = this.add.sprite(0,0,"Test Shop");
 		
+		var moneyText = this.game.add.text(this.game.world.centerX * 1.75, this.game.world.centerY/10, "$100");
+		moneyText.font = "Covered By Your Grace";
+		moneyText.fontSize = 60;
+		moneyText.align = "right";
+		
 		this.game.add.button(this.game.world.centerX / 8,
 				this.game.world.centerY * 1.8,
 				'temp_button',
