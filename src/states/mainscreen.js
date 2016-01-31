@@ -11,7 +11,9 @@ mainscreen.prototype = {
 	create: function (){
 		this.add.sprite(0,0,"Mainscreen Background");
 
-		this.game.add.text(this.game.world.centerX, this.game.world.centerY, "$100");
+		var moneyText = this.game.add.text(this.game.world.centerX, this.game.world.centerY, "$100");
+    moneyText.font = "Covered By Your Grace";
+		moneyText.fontSize = 60;
 
 		this.game.add.button(this.game.world.centerX - 367,
 				this.game.world.centerY - 150,
