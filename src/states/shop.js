@@ -3,6 +3,7 @@
 var shop = function(game){}
 
 shop.prototype = {
+	allCardOptions: [],
 	selectedCard: null,
 	preload: function(){
 		//this.game.load.image("Test Title","Honeyview_game.png");
@@ -20,9 +21,14 @@ shop.prototype = {
 			ritualCardText.font = "Covered By Your Grace";
 			ritualCardText.fontSize = 60;
 			ritualCardText.inputEnabled = true;
-			ritualCardText.events.onInputUp.add(function(){
+			ritualCardText.events.onInputUp.add(function(selectedRitualCardText){
 				this.selectedCard = card;
+				this.allCardOptions.forEach(function(text){
+					text.fill = '#000000';
+				}, this);
+				selectedRitualCardText.fill = '#FF0000';
 		  }, this);
+			this.allCardOptions.push(ritualCardText);
 		}, this);
 
 		this.game.add.button(this.game.world.centerX / 8,
