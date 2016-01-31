@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <title>hello phaser2!</title>
         <script src="phaser.min.js"></script>
+        <script src="jquery-2.2.0.js"></script>
     </head>
     <body>
 
@@ -324,6 +325,7 @@
                         ++results.trueBelieversLost;
                     } else if(currentLikelihoodToStay < 100) {
                         ++results.trueBelieversDowngraded;
+                        entry.trueBeliever = false;
                     }
                 }
             });
@@ -400,6 +402,11 @@
     };
 
     </script>
-
+        <div name="example1" style="position: absolute; z-index: 1; left: 50px; top: 20px; width:150px; height:120px; background-color: green; ">
+            <button id="prev">&lt;</button> <button id="next">&gt;</button><br />
+            <button id="choice1">choice 1</button> <br />
+            <button id="choice2">choice 2</button> <br />
+            <button id="choice3">choice 3</button> <br />
+        </div>
     </body>
 </html>
