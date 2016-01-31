@@ -2,23 +2,50 @@ var results = function(game){}
 
 	results.prototype = {
 		
-		
+		moneyText : null,
 		
 		create:function(){
 		
-		var testsplash = this.add.sprite(0,0,"Test Results");
+		var testsplash = this.add.sprite(0,0,"Results1");
 		
-		var r = this.game.add.text(this.game.world.centerX - 140, this.game.world.centerY + 120, "Loyalty Increased!");
-		r.font = "Covered By Your Grace";
-		r.fontSize = 60;
+		this.moneyText = this.game.add.text(this.game.world.centerX * 1.84, 25, engine.getMoney().toString());
+		this.moneyText.font = "Covered By Your Grace";
+		this.moneyText.fontSize = 30;
+		this.moneyText.align = "right";
 		
-		this.game.add.button(this.game.world.centerX - 100,
-				this.game.world.centerY * 1.75,
+		//Card kill chicken is a placeholder, will have to pass in the ritual used to get to results screen
+		this.add.sprite(this.game.world.centerX * .7, this.game.world.centerY * .4, "card_kill_chicken");
+		
+		this.game.add.button(this.game.world.centerX - 120,
+				this.game.world.centerY * 1.57,
 				'temp_button',
-				function(){ this.game.state.start("Main Screen"); },
+				function(){this.r2();},
+				this,
+				1,
+				0,
+				2);
+		},
+		
+		r2:function(){
+			var testsplash = this.add.sprite(0,0,"Results2");
+			
+			this.moneyText = this.game.add.text(this.game.world.centerX * 1.84, 25, engine.getMoney().toString());
+			this.moneyText.font = "Covered By Your Grace";
+			this.moneyText.fontSize = 30;
+			this.moneyText.align = "right";
+			
+			var r = this.game.add.text(this.game.world.centerX - 240, this.game.world.centerY - 120, "Loyalty Increased!");
+			r.font = "Covered By Your Grace";
+			r.fontSize = 60;
+			this.game.add.button(this.game.world.centerX - 120,
+				this.game.world.centerY * 1.57,
+				'temp_button',
+				function(){this.game.state.start("Main Screen");},
 				this,
 				1,
 				0,
 				2);
 		}
-	}
+			
+			
+		}
