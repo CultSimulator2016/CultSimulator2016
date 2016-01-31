@@ -7,6 +7,15 @@ rituals.prototype = {
 		//this.game.load.image("Test Title","Honeyview_game.png");
 	},
   	create: function(){
-		this.game.state.start("Title Screen");
+		var testSplash = this.add.sprite(0,0,"Test Ritual");
+		
+		this.game.add.button(this.game.world.centerX / 8,
+				this.game.world.centerY * 1.8,
+				'temp_button',
+				function(){ this.game.state.start("Main Screen"); },
+				this,
+				1,
+				0,
+				2);
 	}
 }

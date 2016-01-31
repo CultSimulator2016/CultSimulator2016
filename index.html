@@ -8,6 +8,9 @@
 		<script src="src\states\preloader.js"></script>
 		<script src="src\states\titlescreen.js"></script>
 		<script src="src\states\mainscreen.js"></script>
+		<script src="src\states\cult.js"></script>
+		<script src="src\states\rituals.js"></script>
+		<script src="src\states\shop.js"></script>
 		<script src="src\states\credits.js"></script>
     </head>
     <body>
@@ -22,6 +25,9 @@
 	game.state.add("Preload",preloader);
 	game.state.add("Title Screen",titlescreen);
 	game.state.add("Main Screen", mainscreen);
+	game.state.add("Cult", cult);
+	game.state.add("Rituals", rituals);
+	game.state.add("Shop", shop);	
 	game.state.add("Credits Screen", credits);
 	game.state.start("Boot");
     })();
