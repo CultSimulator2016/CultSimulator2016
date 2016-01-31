@@ -60,6 +60,25 @@ mainscreen.prototype = {
 				1,
 				0,
 				2);
+		
+		var devil = this.game.add.sprite(this.game.world.centerX * 1.3, this.game.world.centerY *.75, "Devil");
+		var dbox = this.game.add.sprite(devil.x / 5, devil.y /2, "Dialogue box");
+		var txt = this.game.add.text(dbox.x * 1.3, dbox.y *1.3, "Howdy! You called? You've been chosen to\nrecruit and lead a bunch of followers to\nworship me, Nix! Wow, what a great honor!");
+		txt.font = "Covered By Your Grace";
+		txt.fontSize = 20;
+		txt.fill = "#ffffff";
+		
+		var nxtAro = this.game.add.text(dbox.x * 4.5, dbox.y * 2.5, ">>");
+		nxtAro.font = "Covered By Your Grace";
+		nxtAro.fill = "#800000";
+		nxtAro.inputEnabled = true;
+		//text.events.onInputDown.add(
+		
+		group1 = this.game.add.group();
+		group1.add(devil);
+		group1.add(dbox);
+		group1.add(txt);
+		group1.add(nxtAro);
 	}
 
 }

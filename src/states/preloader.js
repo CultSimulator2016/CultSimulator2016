@@ -15,6 +15,8 @@ preloader.prototype = {
 		this.game.load.image("Name Screen", "assets/screens/name.jpg");
 		this.game.load.image("Test Results", "assets/screens/resultscreen1.jpg");
 		this.game.load.image("Mainscreen Background","assets/screens/mainscreen_clean.jpg");
+		this.game.load.image("Devil","assets/UI/devil.png");
+		this.game.load.image("Dialogue box","assets/ui/dialogbox.png");
 		this.game.load.spritesheet('start_button', 'assets/buttons/start_button_spritesheet.png', 267, 142);
 		this.game.load.spritesheet('temp_button', 'buttonspritesheet.png', 200, 50);
 		this.game.load.spritesheet('cult_button', 'assets/buttons/cult_info.png', 214,70);
