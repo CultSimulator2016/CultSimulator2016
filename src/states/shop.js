@@ -5,6 +5,7 @@ var shop = function(game){}
 shop.prototype = {
 	allCardOptions: [],
 	selectedCard: null,
+	buyButton: null,
 	preload: function(){
 		//this.game.load.image("Test Title","Honeyview_game.png");
 	},
@@ -22,6 +23,7 @@ shop.prototype = {
 			ritualCardText.fontSize = 60;
 			ritualCardText.inputEnabled = true;
 			ritualCardText.events.onInputUp.add(function(selectedRitualCardText){
+				this.buyButton.inputEnabled = engine.getMoney() >= card.cost;
 				this.selectedCard = card;
 				this.allCardOptions.forEach(function(text){
 					text.fill = '#000000';
@@ -40,7 +42,7 @@ shop.prototype = {
 				0,
 				2);
 
-		this.game.add.button(this.game.world.centerX * .45,
+		this.buyButton = this.game.add.button(this.game.world.centerX * .45,
 				this.game.world.centerY * 1.56,
 				'temp_button',
 				function(){
@@ -51,6 +53,7 @@ shop.prototype = {
 				1,
 				0,
 				2);
+		this.buyButton.inputEnabled = false;
 
 		this.game.add.button(this.game.world.centerX * 1.07,
 				this.game.world.centerY * 1.56,
