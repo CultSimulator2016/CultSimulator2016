@@ -115,19 +115,27 @@ mainscreen.prototype = {
 			his = "Nothing!";
 		}
 
-		var txt = this.game.add.text(this.game.world.centerX, this.game.world.centerY, his);
+		var dbox = this.game.add.sprite(this.game.world.centerX - 200, 100,"Rituals History");
+		
+		var txt = this.game.add.text(dbox.x+125, dbox.y+100, his);
 		txt.font = "Covered By Your Grace";
 		txt.lineSpacing = 10;
+		txt.fill = "#ffffff";
 
-		var ex = this.game.add.text(txt.x+ 150, txt.y, "X");
-		ex.font = "Covered By Your Grace";
-		ex.fill = "#800000";
-		ex.inputEnabled = true;
-		ex.events.onInputDown.add(function(){butt.inputEnabled = true; this.group2.destroy();},this);
+		var ex = this.game.add.button(this.game.world.centerX + 40,
+				500,
+				'temp_button',
+				function(){ butt.inputEnabled = true; this.group2.destroy(); },
+				this,
+				1,
+				0,
+				2);
 
 		this.group2 = this.game.add.group();
+		this.group2.add(dbox);
 		this.group2.add(txt);
 		this.group2.add(ex);
+		
 
 	}
 
