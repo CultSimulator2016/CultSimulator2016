@@ -16,7 +16,7 @@ preloader.prototype = {
 		this.game.load.image("Test Results", "assets/screens/resultscreen1.jpg");
 		this.game.load.image("Mainscreen Background","assets/screens/mainscreen_clean.jpg");
 		this.game.load.image("Devil","assets/UI/devil.png");
-		this.game.load.image("Dialogue box","assets/ui/dialogbox.png");
+		this.game.load.image("Dialogue box","assets/UI/dialogbox.png");
 		this.game.load.image("card_kill_chicken","assets/UI/card_kill_chicken.png");
 		this.game.load.image("card_eat_cat_food","assets/UI/card_eat_cat_food.png");
 		this.game.load.image("card_dance_naked","assets/UI/card_dance_naked.png");
