@@ -12,7 +12,8 @@ cult.prototype = {
 		this.game.add.button(this.game.world.centerX / 8,
 				this.game.world.centerY * .65,
 				'temp_button',
-				function(){ console.log("recruit button clicked");},
+				function(){ console.log("recruit button clicked");
+							this.game.state.start("Recruit");},
 				this,
 				1,
 				0,
@@ -21,7 +22,8 @@ cult.prototype = {
 		this.game.add.button(this.game.world.centerX / 8,
 				this.game.world.centerY *1.05,
 				'temp_button',
-				function(){ console.log("shop button clicked");},
+				function(){ console.log("shop button clicked");
+							this.game.state.start("Shop");},
 				this,
 				1,
 				0,

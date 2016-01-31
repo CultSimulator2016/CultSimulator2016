@@ -17,5 +17,15 @@ rituals.prototype = {
 				1,
 				0,
 				2);
+				
+		this.game.add.button(this.game.world.centerX,
+				this.game.world.centerY * 1.5,
+				'temp_button',
+				function(){ console.log("Make Ritual button clicked");
+							},
+				this,
+				1,
+				0,
+				2);
 	}
 }
