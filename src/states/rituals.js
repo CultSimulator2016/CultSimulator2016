@@ -4,11 +4,14 @@ var rituals = function(game){}
 
 rituals.prototype = {
 	selectedCard: null,
+	displayCardSprite: null,
 	preload: function(){
 		//this.game.load.image("Test Title","Honeyview_game.png");
 	},
   	create: function(){
 		var testSplash = this.add.sprite(0,0,"Test Ritual");
+
+		this.displayCardSprite = this.add.sprite(400,200, "bad heart");
 
 		var moneyText = this.game.add.text(this.game.world.centerX * 1.75, this.game.world.centerY/10, "$100");
 		moneyText.font = "Covered By Your Grace";
@@ -24,6 +27,7 @@ rituals.prototype = {
 			ritualCardText.events.onInputUp.add(function(blah){
 				console.log("blah", card, blah);
 				this.selectedCard = card;
+				this.displayCardSprite.loadTexture(card.image);
 		  }, this);
 		}, this);
 

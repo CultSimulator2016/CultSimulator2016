@@ -21,10 +21,10 @@ Engine.prototype.getCardsShop = function() {
 };
 Engine.prototype.getCardsRitual = function() {
   return [
-    { id: 1, text: "Kill chickens" },
-    { id: 2, text: "Eat cat food" },
-    { id: 3, text: "Dance naked" },
-    { id: 63, text: "Burn book" }
+    { id: 1, text: "Kill chickens", image: "bad heart" },
+    { id: 2, text: "Eat cat food", image: "Test Cultist" },
+    { id: 3, text: "Dance naked", image: "bad heart" },
+    { id: 63, text: "Burn book", image: "Test Cultistaoeu" }
   ];
 };
 Engine.prototype.buyCard = function(ritualId) {
