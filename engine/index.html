@@ -127,7 +127,7 @@
                 var income = game.rnd.between(80,120) * averageIncome / 100;
                 followers.push(newFollower(income));
             }
-            console.info("Recruited " + numberRecruits + " " + ((numberRecruits == 1)?"person.": "people." + " Total members: " + countMembers()) );
+            console.info("Recruited " + numberRecruits + " " + (((numberRecruits == 1)?"person.": "people.") + " Total members: " + countMembers()) );
         };
         
         function newFollower(disposeableIncome) {
@@ -297,7 +297,7 @@
                 }
                 if(entry.staying && ritualValue < 0) {
                     entry.ritualHistory.pop();
-                    var newRitualValue = -ritualValue * game.rnd.between(100, 250)/100;
+                    var newRitualValue = -ritualValue * game.rnd.between(-100, 250)/100;
                     entry.ritualHistory.push( { "id": actionResult.ritualId, "value": newRitualValue} );
                     entry.loyalty = calculateLoyalty(entry.ritualHistory);
                 }
@@ -339,7 +339,7 @@
                 resultsText += "one " + maybeTrue + " left";
                 nothingHappened = false;
             }
-            if((results.trueBelieversLost < 1) && (results.followersLeaving > 0)) {
+            if((results.trueBelieversLost < 1 || (results.trueBelieversLost == results.followersLeaving)) && (results.followersLeaving > 0)) {
                 resultsText += ", ";
             } else if(results.trueBelieversLost != results.followersLeaving) {
                 nothingHappened = false;
