@@ -7,5 +7,15 @@ credits.prototype = {
 	},
 	create: function(){
 		this.add.sprite(0,0,"Credits Background");
+		
+		this.game.add.button(this.game.world.centerX - 120,
+				this.game.world.centerY * 1.57,
+				'temp_button',
+				function(){ console.log("main button clicked");
+							this.game.state.start("Main Screen");},
+				this,
+				1,
+				0,
+				2);
 	}
 }
