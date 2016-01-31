@@ -29,14 +29,14 @@ mainscreen.prototype = {
 		this.dayText.font = "Covered By Your Grace";
 		this.dayText.fontSize = 50;
 
-		this.moneyText = this.game.add.text(this.game.world.centerX * 1.84, this.game.world.centerY/11, engine.getMoney().toString());
+		this.moneyText = this.game.add.text(this.game.world.centerX * 1.84, 25, engine.getMoney().toString());
 		this.moneyText.font = "Covered By Your Grace";
 		this.moneyText.fontSize = 30;
 		this.moneyText.align = "right";
 
 		this.game.add.button(this.game.world.centerX - 367,
 				130,
-				'temp_button',
+				'cult_button',
 				function(){ this.game.state.start("Cult"); },
 				this,
 				1,
@@ -45,7 +45,7 @@ mainscreen.prototype = {
 
 		this.game.add.button(this.game.world.centerX - 367,
 				200,
-				'temp_button',
+				'rituals_button',
 				function(){ this.game.state.start("Rituals"); },
 				this,
 				1,
@@ -54,7 +54,7 @@ mainscreen.prototype = {
 
 		this.game.add.button(this.game.world.centerX - 367,
 				270,
-				'temp_button',
+				'shop_button',
 				function(){ this.game.state.start("Shop"); },
 				this,
 				1,

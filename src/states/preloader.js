@@ -13,9 +13,12 @@ preloader.prototype = {
 		this.game.load.image("bad heart","assets/UI/badheart.png");
 		this.game.load.image("Logo","assets/UI/logo.png");
 		this.game.load.image("Name Screen", "assets/screens/name.jpg");
-		this.game.load.image("Mainscreen Background","assets/screens/mainscreen2.jpg");
+		this.game.load.image("Mainscreen Background","assets/screens/mainscreen_clean.jpg");
 		this.game.load.spritesheet('start_button', 'assets/buttons/start_button_spritesheet.png', 267, 142);
 		this.game.load.spritesheet('temp_button', 'buttonspritesheet.png', 200, 50);
+		this.game.load.spritesheet('cult_button', 'assets/buttons/cult_info.png', 214,70);
+		this.game.load.spritesheet('rituals_button', 'assets/buttons/rituals.png', 214,70);
+		this.game.load.spritesheet('shop_button', 'assets/buttons/shop.png', 214,70);
 		//  Load the Google WebFont Loader script
 		this.game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js');
 

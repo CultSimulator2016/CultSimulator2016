@@ -10,16 +10,16 @@ titlescreen.prototype = {
 	create: function (){
 		var testSplash = this.add.sprite(0,0,"Title");
 		this.game.add.button(this.game.world.centerX - 133.5,
-			this.game.world.centerY - 100,
-			'start_button',
+			this.game.world.centerY + 25,
+			'temp_button',
 			function(){ this.game.state.start("Main Screen"); },
 			this,
 			1,
 			0,
 			2);
 
-		this.game.add.button(this.game.world.centerX - 133.5,
-			this.game.world.centerY + 100,
+		this.game.add.button(this.game.world.centerX - 100,
+			this.game.world.centerY + 145,
 			'temp_button',
 			function(){ this.game.state.start("Credits Screen"); },
 			this,
