@@ -15,9 +15,9 @@ Engine.prototype.recruit = function() {
   console.log("Recruiting..");
 };
 Engine.prototype.getCardsShop = function() {
-  return [{ id: 1, name: "Sacrifice Chicken", cost: 100 },
-          { id: 2, name: "Dance Naked", cost: 150 },
-          { id: 3, name: "Eat Cat Food", cost: 200 }];
+  return [{ id: 1, text: "Sacrifice Chicken", cost: 100 },
+          { id: 2, text: "Dance Naked", cost: 150 },
+          { id: 3, text: "Eat Cat Food", cost: 200 }];
 };
 Engine.prototype.getCardsRitual = function() {
   return [
