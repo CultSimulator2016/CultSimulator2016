@@ -6,6 +6,7 @@ shop.prototype = {
 	allCardOptions: [],
 	selectedCard: null,
 	buyButton: null,
+	moneyText: null,
 	preload: function(){
 		//this.game.load.image("Test Title","Honeyview_game.png");
 	},
@@ -48,6 +49,9 @@ shop.prototype = {
 				function(){
 									engine.buyCard(this.selectedCard.id);
 									// TODO: Refresh screen
+									// refresh list of cards
+									// update money
+									this.moneyText.text = engine.getMoney().toString();
 							},
 				this,
 				1,

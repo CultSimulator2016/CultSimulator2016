@@ -1,9 +1,11 @@
-function Engine() { };
+function Engine() {
+  this.money = 500;
+};
 Engine.prototype.getDay = function() {
   return 99;
 };
 Engine.prototype.getMoney = function() {
-  return 999;
+  return this.money;
 };
 Engine.prototype.getOverallLoyalty = function() {
   return 42;
@@ -29,6 +31,7 @@ Engine.prototype.getCardsRitual = function() {
 };
 Engine.prototype.buyCard = function(ritualId) {
   console.log("Buying card with ritualId: " + ritualId);
+  this.money -= this.getCardsShop().filter(function(item){ return item.id === ritualId; })[0].cost;
 };
 Engine.prototype.makeRitual = function(ritualId) {
   console.log("Ritual with ritualId: " + ritualId);
