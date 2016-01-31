@@ -52,6 +52,7 @@ rituals.prototype = {
 				'temp_button',
 				function(){
 								engine.makeRitual(this.selectedCard.id);
+								madeRitualImage = this.selectedCard.image;
 								this.game.state.start("Results");
 							},
 				this,
