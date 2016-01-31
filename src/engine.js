@@ -7,9 +7,10 @@ function Engine() {
   this.shopAvailableCards = this.cardsList;
   this.playerAvailableCards = [];
   this.money = 500;
+  this.currentDay = 1;
 };
 Engine.prototype.getDay = function() {
-  return 99;
+  return this.currentDay;
 };
 Engine.prototype.getMoney = function() {
   return this.money;
@@ -38,6 +39,7 @@ Engine.prototype.buyCard = function(ritualId) {
 };
 Engine.prototype.makeRitual = function(ritualId) {
   console.log("Ritual with ritualId: " + ritualId);
+  this.currentDay += 1;
   return ["Loyalty Increased!",
           "2 followers left your cult.."];
 };
