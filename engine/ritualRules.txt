@@ -1,11 +1,5 @@
 [
-{"uid":0, "name": "Celebrate happy hour", "topic": "celebration of happy hour", "loyaltyThreshold": 0.0, "loyaltyFailValue": 0.0, "loyaltySuccessValue": 0.1, "suggestedPrice": 25},
-{"uid":1, "name": "Sacrifice kittens", "topic": "sacrifice of kittens", "loyaltyThreshold": 0.8, "loyaltyFailValue": -0.9, "loyaltySuccessValue": 1.0, "suggestedPrice": 1},
-{"uid":2, "name": "Dress up as kittens", "topic": "kitten kosplay", "loyaltyThreshold": 0.4, "loyaltyFailValue": -0.2, "loyaltySuccessValue": 0.6, "suggestedPrice": 5},
-{"uid":3, "name": "Eat kittens", "topic": "partaking of kit-kats", "loyaltyThreshold": 0.9, "loyaltyFailValue": -1.0, "loyaltySuccessValue": 1.2, "suggestedPrice": 2},
-{"uid":4, "name": "Worship kittens", "topic": "celebration of all things kittens", "loyaltyThreshold": 0.2, "loyaltyFailValue": -0.1, "loyaltySuccessValue": 0.3, "suggestedPrice": 15},
-{"uid":5, "name": "Play with kittens", "topic": "snuggling with kittens", "loyaltyThreshold": 0.0, "loyaltyFailValue": 0.0, "loyaltySuccessValue": 0.2, "suggestedPrice": 30},
-{"uid":6, "name": "Feed homeless kittens", "topic": "feeding of homeless kittens", "loyaltyThreshold": 0.15, "loyaltyFailValue": -0.1, "loyaltySuccessValue": 0.3, "suggestedPrice": 10},
-{"uid":7, "name": "Rescue kittens", "topic": "kitten rescue", "loyaltyThreshold": 0.3, "loyaltyFailValue": -0.2, "loyaltySuccessValue": 0.4, "suggestedPrice": 5},
-{"uid":8, "name": "Eat cat food", "topic": "partaking of fancy cat food", "loyaltyThreshold": 0.6, "loyaltyFailValue": -0.6, "loyaltySuccessValue": 0.8, "suggestedPrice": 4}
+{ id: 1, text: "Sacrifice Chicken", cost: 100, image: "card_kill_chicken", "topic": "sacrifice of chickens", "loyaltyThreshold": 0.0, "loyaltyFailValue": 0.0, "loyaltySuccessValue": 0.1 },
+{ id: 2, text: "Dance Naked", cost: 150, image: "card_dance_naked", "topic": "kitten kosplay", "loyaltyThreshold": 0.4, "loyaltyFailValue": -0.2, "loyaltySuccessValue": 0.6 },
+{ id: 3, text: "Eat Cat Food", cost: 200, image: "card_eat_cat_food", "topic": "partaking of fancy cat food", "loyaltyThreshold": 0.6, "loyaltyFailValue": -0.6, "loyaltySuccessValue": 0.8 }": -0.6, "loyaltySuccessValue": 0.8, "suggestedPrice": 4}
 ]

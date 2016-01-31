@@ -29,6 +29,9 @@ preloader.prototype = {
 		this.game.load.spritesheet('shop_button', 'assets/buttons/shop.png', 214,70);
 		//  Load the Google WebFont Loader script
 		this.game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js');
+        
+        this.game.load.text('ritualRules', 'engine/ritualRules.txt');
+        this.game.load.text('loyaltyRules', 'engine/loyaltyRules.txt');
 
 	},
   	create: function(){

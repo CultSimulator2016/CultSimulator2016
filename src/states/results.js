@@ -34,7 +34,7 @@ var results = function(game){}
 			this.moneyText.fontSize = 30;
 			this.moneyText.align = "right";
 
-			var r = this.game.add.text(this.game.world.centerX - 240, this.game.world.centerY - 120, "Loyalty Increased!");
+			var r = this.game.add.text(this.game.world.centerX - 240, this.game.world.centerY - 120, makeRitualResults[0]);
 			r.font = "Covered By Your Grace";
 			r.fontSize = 60;
 			this.game.add.button(this.game.world.centerX - 120,
