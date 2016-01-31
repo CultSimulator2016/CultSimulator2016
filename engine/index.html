@@ -1,0 +1,248 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>hello phaser2!</title>
+        <script src="phaser.min.js"></script>
+    </head>
+    <body>
+
+    <script type="text/javascript">
+
+    window.onload = function() {
+
+        var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+        //var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create });
+        
+        var player;
+        var platforms;
+        var cursors;
+        var jumpButton;
+        var bpmText;
+        var text = "Lorem ipsum ";
+        var words = [ 
+            'dolor', 'sit', 'amet', 'consectetuer', 'adipiscing', 'elit', 'aenean', 
+            'commodo', 'ligula', 'eget', 'massa', 'sociis', 'natoque', 'penatibus',
+            'et', 'magnis', 'dis', 'parturient', 'montes' ];
+        var run = 5;
+        var current = 2;
+        
+        var rituals;
+        var loyaltyRules;
+
+        function preload () {
+
+            //game.load.image('logo', 'phaser.png');
+            game.stage.backgroundColor = '#85b5e1';
+
+            //game.load.baseURL = 'http://examples.phaser.io/assets/';
+            //game.load.crossOrigin = 'anonymous';
+            game.load.bitmapFont('gem', 'assets/fonts/bitmapFonts/gem.png', 'assets/fonts/bitmapFonts/gem.xml');
+            game.load.text('ritualRules', 'ritualRules.txt');
+            game.load.text('loyaltyRules', 'loyaltyRules.txt');
+
+        }
+
+        function create () {
+
+            game.stage.backgroundColor = 0x272822;
+            
+            
+            var ritualsRaw = JSON.parse( game.cache.getText('ritualRules') );
+            rituals = [];
+            ritualsRaw.forEach(function(entry){
+                rituals[entry.uid] = entry;});
+            
+            loyaltyRules = JSON.parse( game.cache.getText('loyaltyRules') );            
+            
+            var followers = [];
+            for(var i=0; i < 10; ++i) {
+                followers.push(newFollower());
+            }
+            
+            updateFollowers( 0, followers);
+            updateFollowers( 0, followers);
+            updateFollowers( 0, followers);
+            
+            var thing = "";
+            for(var i=0; i < 10; ++i){
+                followers[i].ritualHistory.forEach(function(entry){
+                    thing += entry + " ";
+                });
+                if(followers[i].staying) {
+                    thing += " " + followers[i].staying + " " + followers[i].loyalty + "\n";
+                } else {
+                    thing += " " + followers[i].staying + "\n";
+                }
+            }
+
+            bmpText = game.add.bitmapText(32, 32, 'gem', thing, 16);
+    // bmpText = game.add.bitmapText(32, 32, 'gem', text, 32);
+
+    //  Any one line in the bitmap text won't be longer than 400 pixels.
+    //  The exception to this rule is if the text has no spaces.
+    //  It line-wraps on spaces and word length.
+            bmpText.maxWidth = 400;
+
+    //  A visual marker to show where 400px width is
+            var marker = game.add.graphics(432, 0);
+            marker.beginFill(0xa6e22e);
+            marker.drawRect(0, 0, 1, game.height);
+            marker.endFill();
+
+    //  Write out 200 random words
+            //game.time.events.repeat(100, 200, addText, this);
+            
+
+        }
+        
+        
+        
+        
+        function newFollower() {
+            return {
+                "loyalty": 0,
+                "staying": true,
+                "ritualHistory" : []
+            };
+        }
+        
+        
+        function likelihoodToStay(loyalty) {
+            var prob = 100;
+            loyaltyRules.forEach(function(entry){
+                if(loyalty < entry.rangeEnd && loyalty >= entry.rangeStart) {
+                    prob = entry.probabilityToStay;
+                }
+            });
+            return prob;
+        }
+        
+        
+        function decidedToStay(loyalty) {
+            var prob = likelihoodToStay(loyalty);
+            return (game.rnd.between(0, 100) < prob);
+        }
+        
+        
+        function newBestValue(actual) {
+            return {
+                "sortVal" : Math.abs(actual),
+                "actualVal" : actual
+            };
+        }
+        
+        function calculateLoyalty(ritualValueHistory) {
+            var bestValues = [];
+            for(var i=0; i< 3; ++i){
+                bestValues.push(newBestValue( 0 ));
+            }
+            ritualValueHistory.forEach(function(entry){
+                if(Math.abs(entry) > Math.abs(bestValues[2].sortVal) ) {
+                    bestValues[2] = newBestValue( entry );
+                    bestValues.sort(function numCompare(num1, num2){
+                        return num2.sortVal - num1.sortVal;
+                    });
+                }
+            });
+            
+            var totalValue = 0;
+            var bestStr = "";
+            bestValues.forEach(function(entry){
+                totalValue += entry.actualVal;
+                bestStr += entry.actualVal + " ";
+            });
+            return totalValue;
+        }
+        
+        function calculateMeanLoyalty(followers) {
+            var count = 0;
+            var totalLoyalty = 0;
+            followers.forEach(function(entry){
+                if(entry.staying) {
+                    ++count;
+                    totalLoyalty += entry.loyalty;
+                }
+            });
+            if(count == 0) {
+                count = 1;
+            }
+            return totalLoyalty / count;
+        }
+        
+        function updateFollowers(ritualId, followers) {
+            // directly modify followers
+            var results = {"followersLeaving": 0, "deltaMeanLoyalty": 0, "trueBelieversAdded": 0};
+            
+            var oldMeanLoyalty = calculateMeanLoyalty(followers);
+            
+            var ritual = rituals[ritualId];
+            followers.forEach(function(entry){
+                if(!entry.staying) {return;}
+                
+                var ritualValue;
+                if(entry.loyalty >= ritual.loyaltyThreshold * 100) {
+                    ritualValue = ritual.loyaltySuccessValue * game.rnd.between(80, 120);
+                } else {
+                    ritualValue = ritual.loyaltyFailValue * game.rnd.between(80, 120);
+                }
+                
+                entry.ritualHistory.push( ritualValue );
+                var oldLoyalty = entry.loyalty;
+                entry.loyalty = calculateLoyalty(entry.ritualHistory);
+                entry.staying = decidedToStay( entry.loyalty );
+                if(!entry.staying) {
+                    ++results.followersLeaving;
+                }
+                if(entry.staying && ritualValue < 0) {
+                    entry.ritualHistory.pop();
+                    entry.ritualHistory.push( -ritualValue * game.rnd.between(100, 250)/100 );
+                    entry.loyalty = calculateLoyalty(entry.ritualHistory);
+                }
+                if(likelihoodToStay(oldLoyalty) < 100 && likelihoodToStay(entry.loyalty) == 100) {
+                    ++results.trueBelieversAdded;
+                }
+            });
+            results.deltaMeanLoyalty = calculateMeanLoyalty(followers) - oldMeanLoyalty;
+            if(oldMeanLoyalty == 0) {
+                oldMeanLoyalty = results.deltaMeanLoyalty;
+            }
+            results.deltaMeanLoyaltyPercent = results.deltaMeanLoyalty * 100 / oldMeanLoyalty;
+            
+            var resultsText = "Following " + ritual.topic + ", ";
+            if(results.followersLeaving > 1) {
+                resultsText += results.followersLeaving + " followers left, ";
+            } else if(results.followersLeaving > 1) {
+                resultsText += " one follower left, ";
+            } else {
+                resultsText += " no followers left, ";
+            }
+            
+            if(results.trueBelieversAdded > 1) {
+                resultsText += "" + results.trueBelieversAdded + " people became true believers, "
+            } else if(results.trueBelieversAdded == 1) {
+                resultsText += "" + results.trueBelieversAdded + " person became a true believer, "
+            }
+            
+            if(results.deltaMeanLoyalty > 0) {
+                resultsText += "and overall loyalty increased by " + results.deltaMeanLoyaltyPercent + " percent!";
+            } else if (results.deltaMeanLoyalty < 0) {
+                resultsText += "and overall loyalty decreased by " + -results.deltaMeanLoyaltyPercent + " percent!";
+            } else {
+                resultsText += "and overall loyalty did not change!";
+            }
+            console.info(resultsText);
+            return results;
+        }
+        
+        function update () {
+            //addText();
+            
+        }
+
+    };
+
+    </script>
+
+    </body>
+</html>

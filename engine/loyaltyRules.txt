@@ -1,0 +1,21 @@
+[
+{"rangeStart":-9000, "rangeEnd": -20, "probabilityToStay": 0},
+{"rangeStart":-20, "rangeEnd": -10, "probabilityToStay": 20},
+{"rangeStart":-10, "rangeEnd": -9, "probabilityToStay": 20},
+{"rangeStart":-9, "rangeEnd": -8, "probabilityToStay": 22},
+{"rangeStart":-8, "rangeEnd": -7, "probabilityToStay": 23},
+{"rangeStart":-7, "rangeEnd": -6, "probabilityToStay": 24},
+{"rangeStart":-6, "rangeEnd": -5, "probabilityToStay": 25},
+{"rangeStart":-5, "rangeEnd": -4, "probabilityToStay": 26},
+{"rangeStart":-4, "rangeEnd": -3, "probabilityToStay": 27},
+{"rangeStart":-3, "rangeEnd": -2, "probabilityToStay": 28},
+{"rangeStart":-2, "rangeEnd": -1, "probabilityToStay": 29},
+{"rangeStart":-1, "rangeEnd": 0, "probabilityToStay": 30},
+{"rangeStart":0, "rangeEnd": 1, "probabilityToStay": 40},
+{"rangeStart":1, "rangeEnd": 10, "probabilityToStay": 50},
+{"rangeStart":10, "rangeEnd": 15, "probabilityToStay": 60},
+{"rangeStart":15, "rangeEnd": 20, "probabilityToStay": 70},
+{"rangeStart":20, "rangeEnd": 25, "probabilityToStay": 80},
+{"rangeStart":25, "rangeEnd": 30, "probabilityToStay": 90},
+{"rangeStart":30, "rangeEnd": 9000, "probabilityToStay": 100}
+]

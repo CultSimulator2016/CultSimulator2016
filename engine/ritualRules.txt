@@ -1,0 +1,11 @@
+[
+{"uid":0, "name": "Celebrate happy hour", "topic": "celebration of happy hour", "loyaltyThreshold": 0.0, "loyaltyFailValue": 0.0, "loyaltySuccessValue": 0.1},
+{"uid":1, "name": "Sacrifice kittens", "topic": "sacrifice of kittens", "loyaltyThreshold": 0.8, "loyaltyFailValue": -0.9, "loyaltySuccessValue": 1.0},
+{"uid":2, "name": "Dress up as kittens", "topic": "kitten kosplay", "loyaltyThreshold": 0.4, "loyaltyFailValue": -0.2, "loyaltySuccessValue": 0.6},
+{"uid":3, "name": "Eat kittens", "topic": "partaking of kit-kats", "loyaltyThreshold": 0.9, "loyaltyFailValue": -1.0, "loyaltySuccessValue": 1.2},
+{"uid":4, "name": "Worship kittens", "topic": "celebration of all things kittens", "loyaltyThreshold": 0.2, "loyaltyFailValue": -0.1, "loyaltySuccessValue": 0.3},
+{"uid":5, "name": "Play with kittens", "topic": "snuggling with kittens", "loyaltyThreshold": 0.0, "loyaltyFailValue": 0.0, "loyaltySuccessValue": 0.2},
+{"uid":6, "name": "Feed homeless kittens", "topic": "feeding of homeless kittens", "loyaltyThreshold": 0.15, "loyaltyFailValue": -0.1, "loyaltySuccessValue": 0.3},
+{"uid":7, "name": "Rescue kittens", "topic": "kitten rescue", "loyaltyThreshold": 0.3, "loyaltyFailValue": -0.2, "loyaltySuccessValue": 0.4},
+{"uid":8, "name": "Eat cat food", "topic": "partaking of fancy cat food", "loyaltyThreshold": 0.6, "loyaltyFailValue": -0.6, "loyaltySuccessValue": 0.8}
+]
