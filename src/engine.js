@@ -1,4 +1,11 @@
 function Engine() {
+  this.cardsList = [
+          { id: 1, text: "Sacrifice Chicken", cost: 100, image: "bad heart" },
+          { id: 2, text: "Dance Naked", cost: 150, image: "Test Cultist" },
+          { id: 3, text: "Eat Cat Food", cost: 200, image: "fake image" }
+  ];
+  this.shopAvailableCards = this.cardsList;
+  this.playerAvailableCards = [];
   this.money = 500;
 };
 Engine.prototype.getDay = function() {
@@ -17,21 +24,17 @@ Engine.prototype.recruit = function() {
   console.log("Recruiting..");
 };
 Engine.prototype.getCardsShop = function() {
-  return [{ id: 1, text: "Sacrifice Chicken", cost: 100 },
-          { id: 2, text: "Dance Naked", cost: 150 },
-          { id: 3, text: "Eat Cat Food", cost: 200 }];
+  return this.shopAvailableCards;
 };
 Engine.prototype.getCardsRitual = function() {
-  return [
-    { id: 1, text: "Kill chickens", image: "bad heart" },
-    { id: 2, text: "Eat cat food", image: "Test Cultist" },
-    { id: 3, text: "Dance naked", image: "bad heart" },
-    { id: 63, text: "Burn book", image: "Test Cultistaoeu" }
-  ];
+  return this.playerAvailableCards;
 };
 Engine.prototype.buyCard = function(ritualId) {
   console.log("Buying card with ritualId: " + ritualId);
-  this.money -= this.getCardsShop().filter(function(item){ return item.id === ritualId; })[0].cost;
+  var card = this.cardsList.filter(function(item){ return item.id === ritualId; })[0];
+  this.money -= card.cost;
+  this.playerAvailableCards.push(card);
+  this.shopAvailableCards.splice(this.shopAvailableCards.indexOf(card), 1);
 };
 Engine.prototype.makeRitual = function(ritualId) {
   console.log("Ritual with ritualId: " + ritualId);
