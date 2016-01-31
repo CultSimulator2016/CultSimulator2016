@@ -28,6 +28,7 @@ rituals.prototype = {
 				'temp_button',
 				function(){
 								engine.makeRitual(999);
+								this.game.state.start("Results");
 							},
 				this,
 				1,

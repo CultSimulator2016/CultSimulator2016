@@ -13,6 +13,7 @@ preloader.prototype = {
 		this.game.load.image("bad heart","assets/UI/badheart.png");
 		this.game.load.image("Logo","assets/UI/logo.png");
 		this.game.load.image("Name Screen", "assets/screens/name.jpg");
+		this.game.load.image("Test Results", "assets/screens/resultscreen1.jpg");
 		this.game.load.image("Mainscreen Background","assets/screens/mainscreen_clean.jpg");
 		this.game.load.spritesheet('start_button', 'assets/buttons/start_button_spritesheet.png', 267, 142);
 		this.game.load.spritesheet('temp_button', 'buttonspritesheet.png', 200, 50);
