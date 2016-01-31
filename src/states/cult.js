@@ -7,14 +7,22 @@ cult.prototype = {
 	},
   	create: function(){
 		//this.game.state.start("Title Screen");
-		var testSplash = this.add.sprite(0,0,"Test Cult");
+		var testSplash = this.add.sprite(0,0,"Cult");
 
-		var moneyText = this.game.add.text(this.game.world.centerX * 1.75, this.game.world.centerY/10, "$100");
-		moneyText.font = "Covered By Your Grace";
-		moneyText.fontSize = 60;
-		moneyText.align = "right";
+		this.moneyText = this.game.add.text(this.game.world.centerX * 1.84, 25, engine.getMoney().toString());
+		this.moneyText.font = "Covered By Your Grace";
+		this.moneyText.fontSize = 30;
+		this.moneyText.align = "right";
 		
-		this.game.add.button(this.game.world.centerX / 8,
+		this.loyaltyText = this.game.add.text(this.game.world.centerX * 1.65, this.game.world.centerY * .925, engine.getOverallLoyalty().toString());
+		this.loyaltyText.font = "Covered By Your Grace";
+		this.loyaltyText.fontSize = 40;
+		
+		this.loyaltyText = this.game.add.text(this.game.world.centerX -14, this.game.world.centerY * 1.52, engine.getFollowersCount().toString());
+		this.loyaltyText.font = "Covered By Your Grace";
+		this.loyaltyText.fontSize = 60;
+		
+		this.game.add.button(this.game.world.centerX / 9,
 				this.game.world.centerY * .65,
 				'temp_button',
 				function(){ console.log("recruit button clicked");
@@ -24,8 +32,8 @@ cult.prototype = {
 				0,
 				2);
 				
-		this.game.add.button(this.game.world.centerX / 8,
-				this.game.world.centerY *1.05,
+		this.game.add.button(this.game.world.centerX / 9,
+				this.game.world.centerY *.9,
 				'temp_button',
 				function(){ console.log("shop button clicked");
 							this.game.state.start("Shop");},
@@ -34,8 +42,8 @@ cult.prototype = {
 				0,
 				2);
 				
-		this.game.add.button(this.game.world.centerX / 8,
-				this.game.world.centerY * 1.8,
+		this.game.add.button(this.game.world.centerX / 9,
+				this.game.world.centerY * 1.75,
 				'temp_button',
 				function(){ console.log("main button clicked");
 							this.game.state.start("Main Screen");},

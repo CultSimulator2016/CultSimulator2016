@@ -8,7 +8,7 @@ preloader.prototype = {
 		this.game.load.image("Test Cultist","testCultist.png");
 		this.game.load.image("Test Ritual","assets/screens/deckscreen.jpg");
 		this.game.load.image("Test Shop","assets/screens/shopscreen.jpg");
-		this.game.load.image("Test Cult","assets/screens/cultscreen.jpg");
+		this.game.load.image("Cult","assets/screens/cultinfoscreen.jpg");
 		this.game.load.image("Test Recruitment","assets/screens/recruitscreen.jpg");
 		this.game.load.image("bad heart","assets/UI/badheart.png");
 		this.game.load.image("Logo","assets/UI/logo.png");
