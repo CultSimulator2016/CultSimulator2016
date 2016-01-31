@@ -8,7 +8,7 @@ boot.prototype = {
 		//this.game.load.image("Test Title","titlescreen.jpg");
 	},
   	create: function(){
-		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+		this.scale.scaleMode = Phaser.ScaleManager.NO_SCALE;
 		this.scale.pageAlignHorizontally = true;
 		//this.scale.setScreenSize();
 		this.game.state.start("Preload");
