@@ -9,12 +9,12 @@ recruitment.prototype = {
   	create: function(){
 		var testSplash = this.add.sprite(0,0,"Test Recruitment");
 
-		var moneyText = this.game.add.text(this.game.world.centerX * 1.75, this.game.world.centerY/10, "$100");
+		var moneyText = this.game.add.text(this.game.world.centerX * 1.84, 25, engine.getMoney().toString());
 		moneyText.font = "Covered By Your Grace";
-		moneyText.fontSize = 60;
+		moneyText.fontSize = 30;
 		moneyText.align = "right";
 
-		this.game.add.button(this.game.world.centerX / 8,
+		this.game.add.button(0,
 				this.game.world.centerY * 1.8,
 				'temp_button',
 				function(){ this.game.state.start("Main Screen"); },
@@ -23,7 +23,7 @@ recruitment.prototype = {
 				0,
 				2);
 
-		this.game.add.button(this.game.world.centerX - 100,
+		this.game.add.button(200,
 				this.game.world.centerY * 1.8,
 				'temp_button',
 				function(){ this.game.state.start("Cult"); },
