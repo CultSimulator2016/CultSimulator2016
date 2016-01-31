@@ -27,7 +27,7 @@ titlescreen.prototype = {
 			0,
 			2);
 		
-		var delay = 0;
+		/*var delay = 0;
 
 		for (var i = 0; i < 25; i++)
 		{
@@ -40,7 +40,7 @@ titlescreen.prototype = {
 			this.game.add.tween(sprite).to({ y: -256 }, speed, Phaser.Easing.Sinusoidal.InOut, true, delay, 1000, false);
 
 			delay += 1000;
-		}
+		}*/
 	}
 
 }

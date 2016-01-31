@@ -1,6 +1,7 @@
 var preloader = function(game){}
 
 preloader.prototype = {
+
 	preload: function(){
 		//this.game.load.image("Test Title","Honeyview_game.png");
 		this.game.load.image("Test Title","assets/screens/titlescreen.jpg");
@@ -14,6 +15,8 @@ preloader.prototype = {
 		this.game.load.image("Mainscreen Background","assets/screens/mainscreen.jpg");
 		this.game.load.spritesheet('start_button', 'assets/buttons/start_button_spritesheet.png', 267, 142);
 		this.game.load.spritesheet('temp_button', 'buttonspritesheet.png', 200, 50);
+		//  Load the Google WebFont Loader script
+		this.game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js');
 
 	},
   	create: function(){

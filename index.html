@@ -22,13 +22,27 @@
 
     var game = new Phaser.Game(800, 600, Phaser.AUTO, '');
 
+    WebFontConfig = {
+
+        //  'active' means all requested fonts have finished loading
+        //  We set a 1 second delay before calling 'createText'.
+        //  For some reason if we don't the browser cannot render the text the first time it's created.
+        active: function() { game.time.events.add(Phaser.Timer.SECOND, function(){ }, this); },
+
+        //  The Google Fonts we want to load (specify as many as you like in the array)
+        google: {
+          families: ['Covered+By+Your+Grace::latin']
+        }
+
+    };
+
     game.state.add("Boot",boot);
 	game.state.add("Preload",preloader);
 	game.state.add("Title Screen",titlescreen);
 	game.state.add("Main Screen", mainscreen);
 	game.state.add("Cult", cult);
 	game.state.add("Rituals", rituals);
-	game.state.add("Shop", shop);	
+	game.state.add("Shop", shop);
 	game.state.add("Recruit", recruitment);
 	game.state.add("Credits Screen", credits);
 	game.state.start("Boot");
