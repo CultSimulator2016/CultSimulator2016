@@ -64,7 +64,7 @@
                 var trueBelieverCount = 0;
                 var followerCount = 0;
                 followers.forEach(function(entry){
-                    trueBelieverCount += (likelihoodToStay(entry.loyalty) == 100 && entry.staying)?1:0;
+                    trueBelieverCount += (entry.trueBeliever && entry.staying)?1:0;
                     followerCount += (entry.staying && entry.ritualHistory.length > 0)? 1: 0;
                 });
                 var numRecruits = (game.rnd.between(50, 150) * (1 + trueBelieverCount*5 + followerCount/5) / 100).toFixed(0);
@@ -90,7 +90,7 @@
             
             var oldFunds = funds;
             updateFollowers( performShakedown(), followers);
-            console.info("$" + (funds - oldFunds).toFixed(2) + " were collected, total funds: $" + funds.toFixed(2));
+            console.info("Obtained $" + (funds - oldFunds).toFixed(2) + ", total funds: $" + funds.toFixed(2));
             followers.recruitFollowers();
             
             var thing = "";
@@ -135,6 +135,7 @@
                 "loyalty": 0,
                 "disposeableIncome": disposeableIncome,
                 "staying": true,
+                "trueBeliever": false,
                 "ritualHistory" : []
             };
         }
@@ -193,7 +194,7 @@
             } else {
                 var trueBelieverCount = 0;
                 followers.forEach(function(entry){
-                    trueBelieverCount += likelihoodToStay(entry.loyalty) == 100?1:0;
+                    trueBelieverCount += entry.trueBeliever? 1: 0;
                 });
                 return 5 * Math.sqrt(followers.length *(trueBelieverCount + 1));
             }
@@ -217,7 +218,7 @@
         function passiveFundCollection(followers) {
             var amount = 0;
             followers.forEach(function(entry){
-                if(!entry.staying || entry.ritualHistory.length < 1 || likelihoodToStay(entry.loyalty) < 100) {
+                if(!entry.staying || !entry.trueBeliever) {
                     return;
                 }
                 amount += Math.min(entry.loyalty, 100) * entry.disposeableIncome / game.rnd.between(80, 120);
@@ -316,6 +317,7 @@
                 var currentLikelihoodToStay = likelihoodToStay(entry.loyalty);
                 if(likelihoodToStay(oldLoyalty) < 100 && currentLikelihoodToStay == 100) {
                     ++results.trueBelieversAdded;
+                    entry.trueBeliever = true;
                 }
                 if(likelihoodToStay(oldLoyalty) == 100) {
                     if(!entry.staying) {
