@@ -3,6 +3,7 @@
 var rituals = function(game){}
 
 rituals.prototype = {
+	allCardOptions: [],
 	selectedCard: null,
 	displayCardSprite: null,
 	preload: function(){
@@ -24,11 +25,15 @@ rituals.prototype = {
 			ritualCardText.font = "Covered By Your Grace";
 			ritualCardText.fontSize = 60;
 			ritualCardText.inputEnabled = true;
-			ritualCardText.events.onInputUp.add(function(blah){
-				console.log("blah", card, blah);
+			ritualCardText.events.onInputUp.add(function(selectedRitualCardText){
 				this.selectedCard = card;
 				this.displayCardSprite.loadTexture(card.image);
+				this.allCardOptions.forEach(function(text){
+					text.fill = '#000000';
+				}, this);
+				selectedRitualCardText.fill = '#FF0000';
 		  }, this);
+			this.allCardOptions.push(ritualCardText);
 		}, this);
 
 		this.game.add.button(this.game.world.centerX / 8,
