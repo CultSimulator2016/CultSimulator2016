@@ -3,4 +3,4 @@ This is our game created during GGJ 2016. Define your rituals and manage your fo
 
 [![Join the chat at https://gitter.im/CultSimulator2016/CultSimulator2016](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/CultSimulator2016/CultSimulator2016)
 
-http://globalgamejam.org/2016/games/cult-simulator-2016
+http://globalgamejam.org/2016/games/cult-captors
