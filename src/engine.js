@@ -101,6 +101,8 @@ Engine.prototype.recruit = function() {
         });
         var numRecruits = (this.game.rnd.between(50, 150) * (1 + trueBelieverCount*3 + activeFollowerCount/5) / 100).toFixed(0);
         this.addRecruits(numRecruits);
+    } else {
+        console.info("Recruiting costs money!  You don't have enough!");
     }
 };
 
@@ -138,6 +140,9 @@ Engine.prototype.buyCard = function(ritualId) {
 };
 
 Engine.prototype.makeRitual = function(ritualId) {
+    if(this.getFollowersCount() < 1) {
+        return ["Rituals require followers!  (You have none.)"];
+    }
     var card = this.cardsList.filter(function(item){ return item.id === ritualId; })[0];
     console.log(card, this.cardsList, ritualId, this.cardsList.filter(function(item){ return item.id === ritualId; }));
     
@@ -339,67 +344,69 @@ Engine.prototype.updateFollowers = function(action) {
             }
         }
     });
-    results.deltaMeanLoyalty = this.calculateMeanLoyalty() - oldMeanLoyalty;
-    if(oldMeanLoyalty == 0) {
-        oldMeanLoyalty = results.deltaMeanLoyalty;
-    }
-    results.deltaMeanLoyaltyPercent = results.deltaMeanLoyalty * 100 / oldMeanLoyalty;
-
-    var resultsText = "Following " + actionResult.topic + ", ";
-    var nothingHappened = true;
-
-    if(results.prospectsLeaving > 0) {
-        nothingHappened = false;
-        if(results.prospectsLeaving > 1) {
-            resultsText += "" + results.prospectsLeaving + " prospective members decided not to return, ";
-        } else {
-            resultsText += "one prospective member decided not to return, "
+    if(actionResult) {
+        results.deltaMeanLoyalty = this.calculateMeanLoyalty() - oldMeanLoyalty;
+        if(oldMeanLoyalty == 0) {
+            oldMeanLoyalty = results.deltaMeanLoyalty;
         }
-    }
-    if(results.followersLeaving > 1) {
-        var maybeTrue = (results.trueBelieversLost == results.followersLeaving)?"true believers":"followers";
-        resultsText += results.followersLeaving + " " + maybeTrue + " left";
-        nothingHappened = false;
-    } else if(results.followersLeaving > 0) {
-        var maybeTrue = (results.trueBelieversLost == results.followersLeaving)?"true believer":"follower";
-        resultsText += "one " + maybeTrue + " left";
-        nothingHappened = false;
-    }
-    if((results.trueBelieversLost < 1 || (results.trueBelieversLost == results.followersLeaving)) && (results.followersLeaving > 0)) {
-        resultsText += ", ";
-    } else if(results.trueBelieversLost != results.followersLeaving) {
-        nothingHappened = false;
-        resultsText += " including " + results.trueBelieversLost + " true believer";
-        resultsText += (results.trueBelieversLost > 1)?"s":"";
-        resultsText += ", ";
-    }
+        results.deltaMeanLoyaltyPercent = results.deltaMeanLoyalty * 100 / oldMeanLoyalty;
 
-    if(results.trueBelieversAdded > 1) {
-        nothingHappened = false;
-        resultsText += "" + results.trueBelieversAdded + " people became true believers, "
-    } else if(results.trueBelieversAdded == 1) {
-        nothingHappened = false;
-        resultsText += "one person became a true believer, "
-    }
+        var resultsText = "Following " + actionResult.topic + ", ";
+        var nothingHappened = true;
 
-    if(results.trueBelieversDowngraded > 1) {
-        nothingHappened = false;
-        resultsText += "" + results.trueBelieversDowngraded + " true believers had their faith shaken to the core, "
-    } else if(results.trueBelieversDowngraded == 1) {
-        nothingHappened = false;
-        resultsText += "one true believer no longer believes, "
-    }
+        if(results.prospectsLeaving > 0) {
+            nothingHappened = false;
+            if(results.prospectsLeaving > 1) {
+                resultsText += "" + results.prospectsLeaving + " prospective members decided not to return, ";
+            } else {
+                resultsText += "one prospective member decided not to return, "
+            }
+        }
+        if(results.followersLeaving > 1) {
+            var maybeTrue = (results.trueBelieversLost == results.followersLeaving)?"true believers":"followers";
+            resultsText += results.followersLeaving + " " + maybeTrue + " left";
+            nothingHappened = false;
+        } else if(results.followersLeaving > 0) {
+            var maybeTrue = (results.trueBelieversLost == results.followersLeaving)?"true believer":"follower";
+            resultsText += "one " + maybeTrue + " left";
+            nothingHappened = false;
+        }
+        if((results.trueBelieversLost < 1 || (results.trueBelieversLost == results.followersLeaving)) && (results.followersLeaving > 0)) {
+            resultsText += ", ";
+        } else if(results.trueBelieversLost != results.followersLeaving) {
+            nothingHappened = false;
+            resultsText += " including " + results.trueBelieversLost + " true believer";
+            resultsText += (results.trueBelieversLost > 1)?"s":"";
+            resultsText += ", ";
+        }
 
-    var maybeAnd = nothingHappened?"": "and ";
+        if(results.trueBelieversAdded > 1) {
+            nothingHappened = false;
+            resultsText += "" + results.trueBelieversAdded + " people became true believers, "
+        } else if(results.trueBelieversAdded == 1) {
+            nothingHappened = false;
+            resultsText += "one person became a true believer, "
+        }
 
-    if(results.deltaMeanLoyalty > 0) {
-        resultsText += maybeAnd + "overall loyalty increased!";
-    } else if (results.deltaMeanLoyalty < 0) {
-        resultsText += maybeAnd + "overall loyalty decreased!";
-    } else {
-        resultsText += maybeAnd + "overall loyalty did not change!";
+        if(results.trueBelieversDowngraded > 1) {
+            nothingHappened = false;
+            resultsText += "" + results.trueBelieversDowngraded + " true believers had their faith shaken to the core, "
+        } else if(results.trueBelieversDowngraded == 1) {
+            nothingHappened = false;
+            resultsText += "one true believer no longer believes, "
+        }
+
+        var maybeAnd = nothingHappened?"": "and ";
+
+        if(results.deltaMeanLoyalty > 0) {
+            resultsText += maybeAnd + "overall loyalty increased!";
+        } else if (results.deltaMeanLoyalty < 0) {
+            resultsText += maybeAnd + "overall loyalty decreased!";
+        } else {
+            resultsText += maybeAnd + "overall loyalty did not change!";
+        }
+        results.resultsText = resultsText;
+        console.info(resultsText);
+        return results;
     }
-    results.resultsText = resultsText;
-    console.info(resultsText);
-    return results;
 }
