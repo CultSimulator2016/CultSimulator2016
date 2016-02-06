@@ -44,7 +44,6 @@ var results = function(game){}
 			//r.font = "Covered By Your Grace";
 			//r.fontSize = 30;
             r.maxWidth = 500;
-            console.info(r);
 			this.game.add.button(this.game.world.centerX - 120,
 				this.game.world.centerY * 1.57,
 				'temp_button',
