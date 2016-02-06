@@ -1,13 +1,14 @@
 function Engine() {
     
   this.cardsList = [
-          { id: 1, text: "Sacrifice Chicken", cost: 100, image: "card_kill_chicken", "topic": "sacrifice of chickens", "loyaltyThreshold": 0.0, "loyaltyFailValue": 0.0, "loyaltySuccessValue": 0.1 },
-          { id: 2, text: "Dance Naked", cost: 150, image: "card_dance_naked", "topic": "kitten kosplay", "loyaltyThreshold": 0.4, "loyaltyFailValue": -0.2, "loyaltySuccessValue": 0.6 },
-          { id: 3, text: "Eat Cat Food", cost: 200, image: "card_eat_cat_food", "topic": "partaking of fancy cat food", "loyaltyThreshold": 0.6, "loyaltyFailValue": -0.6, "loyaltySuccessValue": 0.8 }
-  ];
+{ id: 1, text: "Sacrifice Chicken", cost: 100, image: "card_kill_chicken", "topic": "sacrifice of chickens", "loyaltyThreshold": 0.0, "loyaltyFailValue": 0.0, "loyaltySuccessValue": 0.1 },
+{ id: 2, text: "Dance Naked", cost: 150, image: "card_dance_naked", "topic": "birthday suit birthday party", "loyaltyThreshold": 0.4, "loyaltyFailValue": -0.2, "loyaltySuccessValue": 0.6 },
+{ id: 3, text: "Eat Cat Food", cost: 200, image: "card_eat_cat_food", "topic": "partaking of fancy cat food", "loyaltyThreshold": 0.6, "loyaltyFailValue": -0.6, "loyaltySuccessValue": 0.8 }
+]
+;
   this.shopAvailableCards = JSON.parse(JSON.stringify(this.cardsList)); // Deep copy hack
   this.playerAvailableCards = [];
-  this.money = 150;
+  this.money = 450;
   this.currentDay = 1;
   this.overallLoyalty = 10;
   this.followersCount = 10;
@@ -49,6 +50,7 @@ Engine.prototype.setGame = function(game) {
 
 Engine.prototype.initRituals = function(ritualFileContent) {
     this.cardsList = JSON.parse( ritualFileContent );
+    this.shopAvailableCards = JSON.parse(JSON.stringify(this.cardsList));
     var that = this;
     this.cardsList.forEach(function(entry){
         that.rituals[entry.id] = entry;
@@ -95,9 +97,9 @@ Engine.prototype.recruit = function() {
         var activeFollowerCount = 0;
         this.followers.forEach(function(entry){
             trueBelieverCount += (entry.trueBeliever && entry.staying)?1:0;
-            followerCount += (entry.staying && entry.ritualHistory.length > 0)? 1: 0;
+            activeFollowerCount += (entry.staying && entry.ritualHistory.length > 0)? 1: 0;
         });
-        var numRecruits = (this.game.rnd.between(50, 150) * (1 + trueBelieverCount*3 + followerCount/5) / 100).toFixed(0);
+        var numRecruits = (this.game.rnd.between(50, 150) * (1 + trueBelieverCount*3 + activeFollowerCount/5) / 100).toFixed(0);
         this.addRecruits(numRecruits);
     }
 };
@@ -145,7 +147,7 @@ Engine.prototype.makeRitual = function(ritualId) {
     
     this.currentDay += 1;
     this.ritualHistory.push(card.text);
-    this.overallLoyalty = this.calculateMeanLoyalty();
+    this.overallLoyalty = this.calculateMeanLoyalty().toFixed(0);
     return [response.resultsText];
 };
 
@@ -208,7 +210,7 @@ Engine.prototype.calculateIncomeOfProspects = function() {
         this.followers.forEach(function(entry){
             trueBelieverCount += entry.trueBeliever? 1: 0;
         });
-        return 5 * Math.sqrt(followers.length *(trueBelieverCount + 1));
+        return 5 * Math.sqrt(this.followers.length *(trueBelieverCount + 1));
     }
 }
 
