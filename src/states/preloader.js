@@ -3,6 +3,7 @@ var preloader = function(game){}
 preloader.prototype = {
 
 	preload: function(){
+        this.game.load.bitmapFont('resultFont', 'assets/fonts/bitmapFonts/desyrel.png', 'assets/fonts/bitmapFonts/desyrel.xml');
 		//this.game.load.image("Test Title","Honeyview_game.png");
 		this.game.load.image("Title","assets/screens/titlescreen2.jpg");
 		this.game.load.image("Test Cultist","testCultist.png");
@@ -18,7 +19,7 @@ preloader.prototype = {
 		this.game.load.image("Mainscreen Background","assets/screens/mainscreen_clean.jpg");
 		this.game.load.image("Devil","assets/UI/devil.png");
 		this.game.load.image("Dialogue box","assets/UI/dialogbox.png");
-		this.game.load.image("Rituals History","assets/UI/rituals_history.png");
+		this.game.load.image("Rituals History","assets/ui/rituals_history.png");
 		this.game.load.image("card_kill_chicken","assets/UI/card_kill_chicken.png");
 		this.game.load.image("card_eat_cat_food","assets/UI/card_eat_cat_food.png");
 		this.game.load.image("card_dance_naked","assets/UI/card_dance_naked.png");
@@ -32,6 +33,7 @@ preloader.prototype = {
         
         this.game.load.text('ritualRules', 'engine/ritualRules.txt');
         this.game.load.text('loyaltyRules', 'engine/loyaltyRules.txt');
+        
 
 	},
   	create: function(){

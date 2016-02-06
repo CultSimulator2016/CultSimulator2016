@@ -34,9 +34,17 @@ var results = function(game){}
 			this.moneyText.fontSize = 30;
 			this.moneyText.align = "right";
 
-			var r = this.game.add.text(this.game.world.centerX - 240, this.game.world.centerY - 120, makeRitualResults[0]);
-			r.font = "Covered By Your Grace";
-			r.fontSize = 60;
+			var r = this.game.add.bitmapText(
+                this.game.world.centerX - 240, 
+                this.game.world.centerY - 120, 
+                'resultFont', 
+                makeRitualResults[0], 
+                30);
+            
+			//r.font = "Covered By Your Grace";
+			//r.fontSize = 30;
+            r.maxWidth = 500;
+            console.info(r);
 			this.game.add.button(this.game.world.centerX - 120,
 				this.game.world.centerY * 1.57,
 				'temp_button',
