@@ -12,7 +12,7 @@ credits.prototype = {
 				this.game.world.centerY * 1.57,
 				'temp_button',
 				function(){ console.log("main button clicked");
-							this.game.state.start("Main Screen");},
+							this.game.state.start("Title Screen");},
 				this,
 				1,
 				0,
