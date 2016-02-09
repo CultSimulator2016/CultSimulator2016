@@ -133,10 +133,12 @@ Engine.prototype.getCardsRitual = function() {
 };
 
 Engine.prototype.buyCard = function(ritualId) {
-  var card = this.cardsList.filter(function(item){ return item.id === ritualId; })[0];
-  this.money -= card.cost;
-  this.playerAvailableCards.push(card);
-  this.shopAvailableCards.splice(this.shopAvailableCards.indexOf(card), 1);
+    var card = this.cardsList.filter(function(item){ return item.id === ritualId; })[0];
+    this.money -= card.cost;
+    this.playerAvailableCards.push(card);
+    
+    var cardIndex = this.shopAvailableCards.filter(function(entry){ return entry.id == ritualId;})[0];
+    this.shopAvailableCards.splice(cardIndex, 1);
 };
 
 Engine.prototype.makeRitual = function(ritualId) {
