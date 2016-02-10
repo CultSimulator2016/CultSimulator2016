@@ -1,6 +1,6 @@
 //Screen where you shake down your followers for donations
 
-var recruitment = function(game){}
+var donations = function(game){}
 
 recruitment.prototype = {
 	preload: function(){
