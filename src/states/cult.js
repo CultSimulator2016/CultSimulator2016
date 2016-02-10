@@ -35,6 +35,26 @@ cult.prototype = {
 		this.game.add.button(this.game.world.centerX / 9,
 				this.game.world.centerY *.9,
 				'temp_button',
+				function(){ console.log("rituals button clicked");
+							this.game.state.start("Rituals");},
+				this,
+				1,
+				0,
+				2);
+		
+		this.game.add.button(this.game.world.centerX / 9,
+				this.game.world.centerY *1.1,
+				'temp_button',
+				function(){ console.log("donations button clicked");
+							this.game.state.start("Donations");},
+				this,
+				1,
+				0,
+				2);
+				
+		this.game.add.button(this.game.world.centerX / 9,
+				this.game.world.centerY *1.3,
+				'temp_button',
 				function(){ console.log("shop button clicked");
 							this.game.state.start("Shop");},
 				this,

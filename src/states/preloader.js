@@ -10,6 +10,7 @@ preloader.prototype = {
 		this.game.load.image("Test Ritual","assets/screens/ritualscreen.jpg");
 		this.game.load.image("Shop","assets/screens/shopscreen2.jpg");
 		this.game.load.image("Cult","assets/screens/cultinfoscreen.jpg");
+		this.game.load.image("Donations","assets/screens/donationscreen.jpg");
 		this.game.load.image("Test Recruitment","assets/screens/recruitscreen.jpg");
 		this.game.load.image("bad heart","assets/UI/badheart.png");
 		this.game.load.image("Logo","assets/UI/logo.png");
