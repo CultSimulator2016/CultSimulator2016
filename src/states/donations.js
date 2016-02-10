@@ -2,7 +2,7 @@
 
 var donations = function(game){}
 
-recruitment.prototype = {
+donations.prototype = {
 	preload: function(){
 
 	},
