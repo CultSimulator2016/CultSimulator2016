@@ -94,7 +94,7 @@ mainscreen.prototype = {
 		nxtAro.inputEnabled = true;
 		
 		//works in order?
-		nxtAro.events.onInputDown.addOnce(removeText, txt);
+		nxtAro.events.onInputDown.addOnce(txt.destroy, this);
 		var txt = this.game.add.text(dbox.x * 1.3, dbox.y *1.3, "Here's where I explain the game to you.");
 
 		nxtAro.events.onInputDown.add(function(){tutSeen=true; this.group1.destroy();},this);
