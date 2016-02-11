@@ -85,13 +85,18 @@ mainscreen.prototype = {
 		var dbox = this.game.add.sprite(devil.x / 5, devil.y /2, "Dialogue box");
 		var txt = this.game.add.text(dbox.x * 1.3, dbox.y *1.3, "Howdy! You called? You've been chosen to\nrecruit and lead a bunch of followers to\nworship me, Nix! Wow, what a great honor!");
 		txt.font = "Covered By Your Grace";
-		txt.fontSize = 20;
+		txt.fontSize = 21;
 		txt.fill = "#ffffff";
 
 		var nxtAro = this.game.add.text(dbox.x * 4.5, dbox.y * 2.5, ">>");
 		nxtAro.font = "Covered By Your Grace";
 		nxtAro.fill = "#800000";
 		nxtAro.inputEnabled = true;
+		
+		//works in order?
+		nxtAro.events.onInputDown.addOnce(removeText, txt);
+		var txt = this.game.add.text(dbox.x * 1.3, dbox.y *1.3, "Here's where I explain the game to you.");
+
 		nxtAro.events.onInputDown.add(function(){tutSeen=true; this.group1.destroy();},this);
 
 		this.group1 = this.game.add.group();
