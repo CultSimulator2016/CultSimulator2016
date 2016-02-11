@@ -95,7 +95,10 @@ mainscreen.prototype = {
 		
 		//works in order?
 		nxtAro.events.onInputDown.addOnce(txt.destroy, this);
-		var txt = this.game.add.text(dbox.x * 1.3, dbox.y *1.3, "Here's where I explain the game to you.");
+		var txt2 = this.game.add.text(dbox.x * 1.3, dbox.y *1.3, "Here's where I explain the game to you.");
+		txt2.font = "Covered By Your Grace";
+		txt2.fontSize = 21;
+		txt2.fill = "#ffffff";
 
 		nxtAro.events.onInputDown.add(function(){tutSeen=true; this.group1.destroy();},this);
 
@@ -103,6 +106,7 @@ mainscreen.prototype = {
 		this.group1.add(devil);
 		this.group1.add(dbox);
 		this.group1.add(txt);
+		this.group1.add(txt2);
 		this.group1.add(nxtAro);
 
 	},
