@@ -137,7 +137,9 @@ Engine.prototype.buyCard = function(ritualId) {
     this.money -= card.cost;
     this.playerAvailableCards.push(card);
     
-    var cardIndex = this.shopAvailableCards.filter(function(entry){ return entry.id == ritualId;})[0];
+    var shopCard = this.shopAvailableCards.filter(function(entry){
+        return entry.id == ritualId;})[0];
+    var cardIndex = this.shopAvailableCards.indexOf(shopCard);
     this.shopAvailableCards.splice(cardIndex, 1);
 };
 
