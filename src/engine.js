@@ -133,14 +133,27 @@ Engine.prototype.getCardsRitual = function() {
 };
 
 Engine.prototype.buyCard = function(ritualId) {
-    var card = this.cardsList.filter(function(item){ return item.id === ritualId; })[0];
-    this.money -= card.cost;
-    this.playerAvailableCards.push(card);
+    var found = false;
+    var card = this.cardsList.filter(
+        function(item){ 
+            found = found || (item.id === ritualId);
+            return item.id === ritualId;
+        })[0];
+    if(!found) return;
     
-    var shopCard = this.shopAvailableCards.filter(function(entry){
-        return entry.id == ritualId;})[0];
+    found = false;
+    var shopCard = this.shopAvailableCards.filter(
+        function(entry){
+            found = found || (entry.id === ritualId);
+            return entry.id === ritualId;
+        })[0];
+    if(!found) return;
+
     var cardIndex = this.shopAvailableCards.indexOf(shopCard);
     this.shopAvailableCards.splice(cardIndex, 1);
+
+    this.money -= card.cost;
+    this.playerAvailableCards.push(card);
 };
 
 Engine.prototype.makeRitual = function(ritualId) {
@@ -176,7 +189,7 @@ Engine.prototype.likelihoodToStay = function(loyalty) {
 
 Engine.prototype.decidedToStay = function(loyalty) {
     var prob = this.likelihoodToStay(loyalty);
-    return (this.game.rnd.between(0, 100) < prob);
+    return (this.game.rnd.between(0, 100) <= prob);
 }
 
 Engine.prototype.newBestValue = function(actual) {
@@ -212,6 +225,9 @@ Engine.prototype.calculateLoyalty = function(ritualValueHistory) {
 }
 
 Engine.prototype.calculateIncomeOfProspects = function() {
+    return 5;
+    
+    // need something that is based on cost of recruiting.
     if(this.followers.length == 0 ) {
         return 5;
     } else {
@@ -240,15 +256,18 @@ Engine.prototype.calculateMeanLoyalty = function() {
 
 Engine.prototype.passiveFundCollection = function() {
     var amount = 0;
+    var that = this;
     this.followers.forEach(function(entry){
         if(!entry.staying || !entry.trueBeliever) {
             return;
         }
-        amount += Math.min(entry.loyalty, 100) * entry.disposeableIncome / this.game.rnd.between(80, 120);
+        amount += Math.min(entry.loyalty / 2, 100) * entry.disposeableIncome / that.game.rnd.between(80, 120);
     });
-    money += amount;
-    console.log("$" + amount.toFixed(2) + " was passively collected.  Total funds: $" + money.toFixed(2));
-    return amount;
+    amount = Math.floor(amount);
+    this.money += amount;
+    var message = "$" + amount + " was passively collected.  Total funds: $" + this.money.toFixed(0);
+    console.log(message);
+    return message;
 }
 
 Engine.prototype.handleRitual = function(ritualId) {
