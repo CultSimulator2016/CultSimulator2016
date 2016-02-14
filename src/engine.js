@@ -95,7 +95,6 @@ Engine.prototype.donationsRequestAllowed = function() {
 Engine.prototype.recruit = function() {
     var cost = 10;
     if(this.money >= cost) {
-        //this.followersCount += 5;
         this.money -= cost;
         
         var trueBelieverCount = 0;
@@ -105,6 +104,9 @@ Engine.prototype.recruit = function() {
             activeFollowerCount += (entry.staying && entry.ritualHistory.length > 0)? 1: 0;
         });
         var numRecruits = Math.min(this.game.rnd.between(15, 20), (this.game.rnd.between(50, 150) * ((1 + trueBelieverCount*3 + activeFollowerCount/5) / 100)) );
+        if(numRecruits < 2) {
+            numRecruits = this.game.rnd.between(1, 2);
+        }
         numRecruits = Math.floor(numRecruits);
         var message = "Recruited ";
         if(numRecruits == 1) {
