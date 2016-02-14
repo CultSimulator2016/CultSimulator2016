@@ -196,6 +196,7 @@ Engine.prototype.askForDonations = function() {
     var response = this.updateFollowers( this.performAskForDonations() );
     this.money = Math.floor(this.money);
     console.info(response);
+    return [response.resultsText];
 }
 
 Engine.prototype.getHistory = function() {

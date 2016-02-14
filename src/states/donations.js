@@ -35,7 +35,10 @@ donations.prototype = {
 		this.game.add.button(this.game.world.centerX - 125,
 				this.game.world.centerY * 1.3,
 				'temp_button',
-				function(){ engine.askForDonations();
+				function(){ 
+            madeRitualImage = 'card_give_money';
+            makeRitualResults = engine.askForDonations();
+                           this.game.state.start("Results");
 							},
 				this,
 				1,
