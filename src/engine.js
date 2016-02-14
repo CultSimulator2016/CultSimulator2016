@@ -15,6 +15,7 @@ function Engine() {
     this.game = {};
   this.ritualHistory = [];
   this.rituals = [];
+  this.mostRecentDonationDay = -1;
   var that = this;
     this.cardsList.forEach(function(entry){
         that.rituals[entry.id] = entry;
@@ -90,7 +91,7 @@ Engine.prototype.getFollowersCount = function() {
 Engine.prototype.recruit = function() {
     var cost = 10;
     if(this.money >= cost) {
-        this.followersCount += 5;
+        //this.followersCount += 5;
         this.money -= cost;
         
         var trueBelieverCount = 0;
@@ -99,8 +100,17 @@ Engine.prototype.recruit = function() {
             trueBelieverCount += (entry.trueBeliever && entry.staying)?1:0;
             activeFollowerCount += (entry.staying && entry.ritualHistory.length > 0)? 1: 0;
         });
-        var numRecruits = (this.game.rnd.between(50, 150) * (1 + trueBelieverCount*3 + activeFollowerCount/5) / 100).toFixed(0);
+        var numRecruits = Math.min(this.game.rnd.between(15, 20), (this.game.rnd.between(50, 150) * ((1 + trueBelieverCount*3 + activeFollowerCount/5) / 100)) );
+        numRecruits = Math.floor(numRecruits);
+        var message = "Recruited ";
+        if(numRecruits == 1) {
+            message += " one person.";
+        } else {
+            message += numRecruits + " people.";
+        }
+        console.log(message);
         this.addRecruits(numRecruits);
+        return message;
     } else {
         console.info("Recruiting costs money!  You don't have enough!");
     }
@@ -172,6 +182,17 @@ Engine.prototype.makeRitual = function(ritualId) {
     this.overallLoyalty = this.calculateMeanLoyalty().toFixed(0);
     return [response.resultsText];
 };
+
+Engine.prototype.askForDonations = function() {
+    if(this.mostRecentDonationDay == this.currentDay) {
+        return;
+    }
+    this.mostRecentDonationDay = this.currentDay;
+    
+    var response = this.updateFollowers( this.performAskForDonations() );
+    this.money = Math.floor(this.money);
+    console.info(response);
+}
 
 Engine.prototype.getHistory = function() {
   return this.ritualHistory;
@@ -255,6 +276,7 @@ Engine.prototype.calculateMeanLoyalty = function() {
 }
 
 Engine.prototype.passiveFundCollection = function() {
+    
     var amount = 0;
     var that = this;
     this.followers.forEach(function(entry){
@@ -266,8 +288,9 @@ Engine.prototype.passiveFundCollection = function() {
     amount = Math.floor(amount);
     this.money += amount;
     var message = "$" + amount + " was passively collected.  Total funds: $" + this.money.toFixed(0);
-    console.log(message);
+    console.log(message);        
     return message;
+    
 }
 
 Engine.prototype.handleRitual = function(ritualId) {
@@ -275,7 +298,7 @@ Engine.prototype.handleRitual = function(ritualId) {
     console.info("handling ritual with id=" + ritualId);
     return function(entry){
         var ritual = that.rituals[ritualId];
-        console.info("inside generated function, handling ritual with id=" + ritual.id + " and ritualId = " + ritualId);
+        //console.info("inside generated function, handling ritual with id=" + ritual.id + " and ritualId = " + ritualId);
         var ritualValue;
         if(entry.loyalty >= ritual.loyaltyThreshold * 100) {
             ritualValue = ritual.loyaltySuccessValue * that.game.rnd.between(80, 120);
@@ -292,6 +315,29 @@ Engine.prototype.handleRitual = function(ritualId) {
             "allowRebound": true
         };
     }
+}
+
+Engine.prototype.performAskForDonations = function() {
+    var that = this;
+    console.info("handling asking for funds");
+    return function(entry) {
+        var ritualValue = 0;
+        console.info("entry for donation:");
+        console.info(entry);
+        if(entry.ritualHistory.length > 0) {
+            ritualValue = -Math.abs(30) * that.game.rnd.between(0, 120) / 100;
+            entry.ritualHistory.push( { "id": "donation", "value": ritualValue} );
+            that.money += entry.disposeableIncome * Math.min(1, (entry.loyalty/ 300));
+        }
+        return {
+            "topic": "the pressuring of members for funds", 
+            "ritualId": "donation", 
+            "ritualValue": ritualValue, 
+            "prospectLossRisk": true,
+            "allowRebound": true
+        };
+    }
+    
 }
 
 Engine.prototype.performShakedown = function() {
@@ -368,6 +414,8 @@ Engine.prototype.updateFollowers = function(action) {
         }
     });
     if(actionResult) {
+        console.log("actionResult:");
+        console.log(actionResult);
         results.deltaMeanLoyalty = this.calculateMeanLoyalty() - oldMeanLoyalty;
         if(oldMeanLoyalty == 0) {
             oldMeanLoyalty = results.deltaMeanLoyalty;

@@ -35,7 +35,7 @@ donations.prototype = {
 		this.game.add.button(this.game.world.centerX - 125,
 				this.game.world.centerY * 1.3,
 				'temp_button',
-				function(){ engine.recruit();
+				function(){ engine.askForDonations();
 							},
 				this,
 				1,
