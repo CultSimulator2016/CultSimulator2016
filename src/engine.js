@@ -89,7 +89,7 @@ Engine.prototype.getFollowersCount = function() {
 };
 
 Engine.prototype.donationsRequestAllowed = function() {
-    return (this.mostRecentDonationDay != this.currentDay) || (this.getFollowersCount() < 1);
+    return (this.mostRecentDonationDay != this.currentDay) && (this.getFollowersCount() >= 1);
 }
 
 Engine.prototype.recruit = function() {
