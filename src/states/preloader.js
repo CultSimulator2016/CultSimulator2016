@@ -25,6 +25,7 @@ preloader.prototype = {
 		this.game.load.image("card_eat_cat_food","assets/UI/card_eat_cat_food.png");
 		this.game.load.image("card_dance_naked","assets/UI/card_dance_naked.png");
 		this.game.load.image("card_give_money","assets/UI/card_give_money.png");
+		this.game.load.image("card_recruit_prospects","assets/UI/card_recruit_prospects.png");
 		this.game.load.spritesheet('start_button', 'assets/buttons/start_button_spritesheet.png', 267, 142);
 		this.game.load.spritesheet('temp_button', 'buttonspritesheet.png', 200, 50);
 		this.game.load.spritesheet('cult_button', 'assets/buttons/cult_info.png', 214,70);

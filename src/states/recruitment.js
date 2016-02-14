@@ -35,8 +35,11 @@ recruitment.prototype = {
 		this.game.add.button(this.game.world.centerX - 125,
 				this.game.world.centerY * 1.3,
 				'temp_button',
-				function(){ engine.recruit();
-							},
+				function(){ 
+                    madeRitualImage = 'card_recruit_prospects';
+                    makeRitualResults = engine.recruit();
+                    this.game.state.start("Results");
+				},
 				this,
 				1,
 				0,

@@ -110,13 +110,13 @@ Engine.prototype.recruit = function() {
         numRecruits = Math.floor(numRecruits);
         var message = "Recruited ";
         if(numRecruits == 1) {
-            message += " one person.";
+            message += "one prospective member.";
         } else {
-            message += numRecruits + " people.";
+            message += numRecruits + " prospective members.";
         }
         console.log(message);
         this.addRecruits(numRecruits);
-        return message;
+        return [message];
     } else {
         console.info("Recruiting costs money!  You don't have enough!");
     }
