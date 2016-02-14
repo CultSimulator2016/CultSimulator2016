@@ -42,11 +42,31 @@ cult.prototype = {
 				0,
 				2);
 		
+        if(!engine.donationsRequestAllowed()){
+            var x = this.game.world.centerX /  9;
+            var y = this.game.world.centerY * 1.2 ;
+            poly = new Phaser.Polygon();
+
+            poly.setTo([ 
+                new Phaser.Point(x +   5, y -  5), 
+                new Phaser.Point(x +  35, y -  5), 
+                new Phaser.Point(x + 180, y + 35), 
+                new Phaser.Point(x + 150, y + 35) ]);
+            graphics = this.game.add.graphics(0, 0);
+
+            graphics.beginFill(0xFF0000);
+            graphics.drawPolygon(poly.points);
+            graphics.endFill();
+        }
+        
 		this.game.add.button(this.game.world.centerX / 9,
 				this.game.world.centerY *1.2,
 				'temp_button',
-				function(){ console.log("donations button clicked");
-							this.game.state.start("Donations");},
+				function(){
+                    console.log("donations button clicked");
+                    if(engine.donationsRequestAllowed()) {
+                        this.game.state.start("Donations");}
+                    },
 				this,
 				1,
 				0,
