@@ -88,6 +88,10 @@ Engine.prototype.getFollowersCount = function() {
     return count;
 };
 
+Engine.prototype.donationsRequestAllowed = function() {
+    return (this.mostRecentDonationDay != this.currentDay) || (this.getFollowersCount() < 1);
+}
+
 Engine.prototype.recruit = function() {
     var cost = 10;
     if(this.money >= cost) {
