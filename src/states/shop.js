@@ -7,6 +7,7 @@ shop.prototype = {
 	selectedCard: null,
 	buyButton: null,
 	moneyText: null,
+    graphics: null,
 	preload: function(){
 		//this.game.load.image("Test Title","Honeyview_game.png");
 	},
@@ -58,6 +59,9 @@ shop.prototype = {
 									}, this);
 									// update money
 									this.moneyText.text = engine.getMoney().toString();
+                                    if(this.graphics){
+                                        this.graphics.destroy();
+                                    }
 							},
 				this,
 				1,
@@ -65,13 +69,38 @@ shop.prototype = {
 				2);
 		this.buyButton.inputEnabled = false;
 
+        
 		this.game.add.button(this.game.world.centerX * 1.07,
 				this.game.world.centerY * 1.56,
 				'temp_button',
-				function(){ this.game.state.start("Rituals"); },
+				function(){
+                    if(engine.ritualsAllowed()) {
+                        this.game.state.start("Rituals"); 
+                    }
+                },
 				this,
 				1,
 				0,
 				2);
-	}
+        if(!engine.ritualsAllowed()){
+            var x = this.game.world.centerX * 1.05;
+            var y = this.game.world.centerY * 1.53;
+            this.bar(x, y);
+        }
+	},
+    
+    bar: function(x, y) {
+        var poly = new Phaser.Polygon();
+
+        poly.setTo([ 
+            new Phaser.Point(x +  20, y + 15), 
+            new Phaser.Point(x +  50, y + 15), 
+            new Phaser.Point(x + 190, y + 55), 
+            new Phaser.Point(x + 160, y + 55) ]);
+        this.graphics = this.game.add.graphics(0, 0);
+
+        this.graphics.beginFill(0xFF0000);
+        this.graphics.drawPolygon(poly.points);
+        this.graphics.endFill();
+    },
 }

@@ -47,14 +47,24 @@ mainscreen.prototype = {
 				0,
 				2);
 
+
 		this.game.add.button(this.game.world.centerX - 367,
 				200,
 				'rituals_button',
-				function(){ this.game.state.start("Rituals"); },
+				function(){
+                    if(engine.ritualsAllowed()) {
+                        this.game.state.start("Rituals"); 
+                    }
+                },
 				this,
 				1,
 				0,
 				2);
+        if(!engine.ritualsAllowed()) {
+            var x = this.game.world.centerX - 367;
+            var y = 200;
+            this.bar(x, y);
+        }
 
 		this.game.add.button(this.game.world.centerX - 367,
 				270,
@@ -108,6 +118,21 @@ mainscreen.prototype = {
 		this.group1.add(nxtAro);
 
 	},
+    
+    bar: function(x,y) {
+        poly = new Phaser.Polygon();
+
+        poly.setTo([ 
+            new Phaser.Point(x +  20, y + 15), 
+            new Phaser.Point(x +  50, y + 15), 
+            new Phaser.Point(x + 190, y + 55), 
+            new Phaser.Point(x + 160, y + 55) ]);
+        graphics = this.game.add.graphics(0, 0);
+
+        graphics.beginFill(0xFF0000);
+        graphics.drawPolygon(poly.points);
+        graphics.endFill();
+    },
 
 	hist: function(butt){
 		var ls = engine.getHistory();
