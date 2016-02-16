@@ -7,6 +7,7 @@ rituals.prototype = {
 	selectedCard: null,
 	displayCardSprite: null,
 	purchaseButton: null,
+    graphics: [],
 	preload: function(){
 		//this.game.load.image("Test Title","Honeyview_game.png");
 	},
@@ -28,6 +29,10 @@ rituals.prototype = {
 			ritualCardText.inputEnabled = true;
 			ritualCardText.events.onInputUp.add(function(selectedRitualCardText){
 				this.purchaseButton.inputEnabled = true;
+                if(this.graphics["ritual"]){
+                    this.graphics["ritual"].destroy();
+                    this.graphics["ritual"] = null;
+                }
 				this.selectedCard = card;
 				this.displayCardSprite.loadTexture(card.image);
 				this.allCardOptions.forEach(function(text){
@@ -60,6 +65,24 @@ rituals.prototype = {
 				0,
 				2);
 		this.purchaseButton.inputEnabled = false;
+        var x = 270;
+        var y = 460;
+        this.bar("ritual", x, y);
 
-	}
+	},
+    
+    bar: function(name, x, y) {
+        var poly = new Phaser.Polygon();
+
+        poly.setTo([ 
+            new Phaser.Point(x +  20, y + 15), 
+            new Phaser.Point(x +  50, y + 15), 
+            new Phaser.Point(x + 190, y + 55), 
+            new Phaser.Point(x + 160, y + 55) ]);
+        this.graphics[name] = this.game.add.graphics(0, 0);
+
+        this.graphics[name].beginFill(0xFF00FF);
+        this.graphics[name].drawPolygon(poly.points);
+        this.graphics[name].endFill();
+    }
 }
