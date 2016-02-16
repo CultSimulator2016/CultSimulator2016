@@ -7,7 +7,7 @@ shop.prototype = {
 	selectedCard: null,
 	buyButton: null,
 	moneyText: null,
-    graphics: null,
+    graphics: [],
 	preload: function(){
 		//this.game.load.image("Test Title","Honeyview_game.png");
 	},
@@ -26,6 +26,18 @@ shop.prototype = {
 			ritualCardText.inputEnabled = true;
 			ritualCardText.events.onInputUp.add(function(selectedRitualCardText){
 				this.buyButton.inputEnabled = engine.getMoney() >= card.cost;
+                if(this.buyButton.inputEnabled) {
+                    if(this.graphics["buy"]){
+                        this.graphics["buy"].destroy();
+                        this.graphics["buy"] = null;
+                    }
+                } else {
+                    if(!this.graphics["buy"]){
+                        var x = this.world.centerX * 0.45;
+                        var y = this.game.world.centerY * 1.53;
+                        this.bar("buy", x, y);
+                    }
+                }
 				this.selectedCard = card;
 				this.allCardOptions.forEach(function(text){
 					text.fill = '#000000';
@@ -59,15 +71,22 @@ shop.prototype = {
 									}, this);
 									// update money
 									this.moneyText.text = engine.getMoney().toString();
-                                    if(this.graphics){
-                                        this.graphics.destroy();
+                                    if(this.graphics["rituals"]){
+                                        this.graphics["rituals"].destroy();
                                     }
+                                    this.buyButton.inputEnabled = false;
+                                    var x = this.world.centerX * 0.45;
+                                    var y = this.game.world.centerY * 1.53;
+                                    this.bar("buy", x, y);
 							},
 				this,
 				1,
 				0,
 				2);
 		this.buyButton.inputEnabled = false;
+        var x = this.world.centerX * 0.45;
+        var y = this.game.world.centerY * 1.53;
+        this.bar("buy", x, y);
 
         
 		this.game.add.button(this.game.world.centerX * 1.07,
@@ -85,11 +104,11 @@ shop.prototype = {
         if(!engine.ritualsAllowed()){
             var x = this.game.world.centerX * 1.05;
             var y = this.game.world.centerY * 1.53;
-            this.bar(x, y);
+            this.bar("rituals", x, y);
         }
 	},
     
-    bar: function(x, y) {
+    bar: function(name, x, y) {
         var poly = new Phaser.Polygon();
 
         poly.setTo([ 
@@ -97,10 +116,10 @@ shop.prototype = {
             new Phaser.Point(x +  50, y + 15), 
             new Phaser.Point(x + 190, y + 55), 
             new Phaser.Point(x + 160, y + 55) ]);
-        this.graphics = this.game.add.graphics(0, 0);
+        this.graphics[name] = this.game.add.graphics(0, 0);
 
-        this.graphics.beginFill(0xFF0000);
-        this.graphics.drawPolygon(poly.points);
-        this.graphics.endFill();
+        this.graphics[name].beginFill(0xFF0000);
+        this.graphics[name].drawPolygon(poly.points);
+        this.graphics[name].endFill();
     },
 }
